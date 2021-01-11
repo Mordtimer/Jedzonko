@@ -1,7 +1,8 @@
-package com.example.jedzonko
+package com.example.jedzonko.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.jedzonko.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
