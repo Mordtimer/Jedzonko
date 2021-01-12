@@ -23,7 +23,6 @@ class ProductFragment: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //todo set productCode value
         val textProductCode = view.findViewById<TextView>(R.id.textProductCode)
         textProductCode.text = productViewModel.productCode
     }
