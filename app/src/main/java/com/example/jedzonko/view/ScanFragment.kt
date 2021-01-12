@@ -1,6 +1,7 @@
 package com.example.jedzonko.view
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -9,9 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.camera.core.AspectRatio
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
+import android.widget.Toast
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
@@ -19,19 +19,27 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.jedzonko.R
 import com.example.jedzonko.viewModel.CameraXViewModel
+import com.example.jedzonko.viewModel.ProductViewModel
+import com.google.mlkit.vision.barcode.BarcodeScanner
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
+import java.util.concurrent.Executors
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
 class ScanFragment() : Fragment() {
     private lateinit var cameraXViewModel: CameraXViewModel
+    private lateinit var productViewModel: ProductViewModel
     private var previewView: PreviewView? = null
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraSelector: CameraSelector? = null
     private var lensFacing = CameraSelector.LENS_FACING_BACK
     private var previewUseCase: Preview? = null
+    private var analysisUseCase: ImageAnalysis? = null
 
     private val screenAspectRatio: Int
         get() {
@@ -45,7 +53,7 @@ class ScanFragment() : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         cameraXViewModel = ViewModelProvider(requireActivity()).get(CameraXViewModel::class.java)
-
+        productViewModel = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         return inflater.inflate(R.layout.scan_fragment, container, false)
     }
 
@@ -65,6 +73,7 @@ class ScanFragment() : Fragment() {
                     cameraProvider = provider
                     if (isCameraPermissionGranted()) {
                         bindPreviewUseCase()
+                        bindAnalyseUseCase()
                     } else {
                         ActivityCompat.requestPermissions(
                                 requireActivity(),
@@ -96,11 +105,78 @@ class ScanFragment() : Fragment() {
                     previewUseCase
             )
         }catch (illegalStateException: IllegalStateException){
-            illegalStateException.message?.let { Log.e(TAG, it) }
+            illegalStateException.message?.let { Log.e(TAG, it)
+            }
         } catch (illegalArgumentException: IllegalArgumentException){
             illegalArgumentException.message?.let { Log.e(TAG, it) }
         }
     }
+
+    private fun bindAnalyseUseCase() {
+        val barcodeScanner: BarcodeScanner = BarcodeScanning.getClient()
+
+        if (cameraProvider == null) {
+            return
+        }
+        if (analysisUseCase != null) {
+            cameraProvider!!.unbind(analysisUseCase)
+        }
+
+        analysisUseCase = ImageAnalysis.Builder()
+                .setTargetAspectRatio(screenAspectRatio)
+                .setTargetRotation(previewView!!.display.rotation)
+                .build()
+
+
+        // Initialize our background executor
+        val cameraExecutor = Executors.newSingleThreadExecutor()
+
+        analysisUseCase?.setAnalyzer(cameraExecutor, { imageProxy ->
+            processImageProxy(barcodeScanner, imageProxy)
+        })
+
+        try {
+            cameraProvider!!.bindToLifecycle(/* lifecycleOwner= */this,
+                    cameraSelector!!,
+                    analysisUseCase
+            )
+        } catch (illegalStateException: IllegalStateException) {
+            illegalStateException.message?.let { Log.e(TAG, it) }
+        } catch (illegalArgumentException: IllegalArgumentException) {
+            illegalArgumentException.message?.let { Log.e(TAG, it) }
+        }
+    }
+
+    @SuppressLint("UnsafeExperimentalUsageError")
+    private fun processImageProxy(
+            barcodeScanner: BarcodeScanner,
+            imageProxy: ImageProxy
+    ) {
+        val inputImage =
+                InputImage.fromMediaImage(imageProxy.image!!, imageProxy.imageInfo.rotationDegrees)
+
+        barcodeScanner.process(inputImage)
+                .addOnSuccessListener { barcodes ->
+
+                    barcodes.forEach {
+                        it.rawValue?.let { it1 -> Log.d("Barcode", it1)}
+                        if(it.rawValue != null){
+                            productViewModel.productCode = it.rawValue
+                            if(view != null)
+                                requireView().findNavController().navigate(R.id.action_scanFragment_to_productFragment)
+                        }
+                    }
+                }
+                .addOnFailureListener {
+                    it.message?.let { it1 -> Log.e(TAG, it1) }
+                }.addOnCompleteListener {
+                    // When the image is from CameraX analysis use case, must call image.close() on received
+                    // images when finished using them. Otherwise, new images may not be received or the camera
+                    // may stall.
+                    imageProxy.close()
+                }
+    }
+
     private fun aspectRatio(width: Int, height: Int): Int {
         val previewRatio = max(width, height).toDouble() / min(width, height)
         if (abs(previewRatio - RATIO_4_3_VALUE) <= abs(previewRatio - RATIO_16_9_VALUE)) {
@@ -116,7 +192,7 @@ class ScanFragment() : Fragment() {
     ) {
         if (requestCode == PERMISSION_CAMERA_REQUEST) {
             if (isCameraPermissionGranted()) {
-                bindPreviewUseCase()
+                setupCamera(requireView())
             } else {
                 Log.e(TAG, "no camera permission")
             }
@@ -138,5 +214,4 @@ class ScanFragment() : Fragment() {
         private const val RATIO_4_3_VALUE = 4.0 / 3.0
         private const val RATIO_16_9_VALUE = 16.0 / 9.0
     }
-
 }
