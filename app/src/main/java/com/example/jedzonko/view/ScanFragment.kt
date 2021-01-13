@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ToggleButton
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -60,6 +61,18 @@ class ScanFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupCamera(view)
+
+    }
+
+    private fun toogleFlash(control: CameraControl){
+            val flashButton = requireView().findViewById<ToggleButton>(R.id.toggleButtonFlash)
+            flashButton.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    control.enableTorch(true)
+                } else {
+                    control.enableTorch(false)
+                }
+        }
     }
 
     private fun setupCamera(view: View) {
@@ -72,7 +85,7 @@ class ScanFragment() : Fragment() {
                 .observe(viewLifecycleOwner, Observer { provider: ProcessCameraProvider? ->
                     cameraProvider = provider
                     if (isCameraPermissionGranted()) {
-                        bindPreviewUseCase(screenAspectRatio)
+                        bindPreviewUseCase()
                         bindAnalyseUseCase()
                     } else {
                         ActivityCompat.requestPermissions(
@@ -85,7 +98,7 @@ class ScanFragment() : Fragment() {
                 )
     }
 
-    private fun bindPreviewUseCase(screenAspectRatio:Int) {
+    private fun bindPreviewUseCase() {
         if (cameraProvider == null) {
             return
         }
@@ -100,10 +113,11 @@ class ScanFragment() : Fragment() {
         previewUseCase!!.setSurfaceProvider(previewView!!.createSurfaceProvider())
 
         try {
-            cameraProvider!!.bindToLifecycle(/* lifecycleOwner= */this,
+            val control = cameraProvider!!.bindToLifecycle(/* lifecycleOwner= */this,
                     cameraSelector!!,
                     previewUseCase
             )
+            toogleFlash(control.cameraControl)
         }catch (illegalStateException: IllegalStateException){
             illegalStateException.message?.let { Log.e("idk", it)
             }
