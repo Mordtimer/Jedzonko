@@ -39,7 +39,33 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Barcode model dependencies
+    implementation 'com.google.mlkit:barcode-scanning:16.0.1'
+
+    // CameraX dependencies
+    implementation "androidx.camera:camera-camera2:1.0.0-beta06"
+    implementation "androidx.camera:camera-lifecycle:1.0.0-beta06"
+    implementation "androidx.camera:camera-view:1.0.0-alpha13"
+
+    // ViewModel dependencies
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+/*
+    //room
+    def room_version = "2.2.5"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+*/
 }
