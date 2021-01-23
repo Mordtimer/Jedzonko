@@ -3,10 +3,37 @@ package com.example.jedzonko.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.jedzonko.R
+import android.util.Log
+import com.example.jedzonko.model.ApiRequest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.awaitResponse
+import retrofit2.converter.gson.GsonConverterFactory
 
+const val BASE_URL="https://world.openfoodfacts.org/api/v0/"
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    private fun getProduct(){
+
+        val api = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(ApiRequest::class.java)
+
+        GlobalScope.launch(Dispatchers.IO){
+           val response = api.getProduct("3228857000166").awaitResponse()
+           // val response = api.getProduct("5900334008381").awaitResponse()
+            if(response.isSuccessful){
+                val data = response.body()
+                Log.d("Product: ", data.toString() + data?.product.toString())
+            }
+        }
     }
 }
