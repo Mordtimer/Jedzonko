@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.jedzonko.R
 import android.util.Log
-import com.example.jedzonko.model.ApiRequest
+import com.example.jedzonko.api.ApiRequest
+import com.example.jedzonko.util.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -12,7 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL="https://world.openfoodfacts.org/api/v0/"
 class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,9 +20,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getProduct(){
-
         val api = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ApiRequest::class.java)
