@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ToggleButton
@@ -118,6 +119,7 @@ class ScanFragment() : Fragment() {
                     previewUseCase
             )
             toogleFlash(control.cameraControl)
+            tapToFocusSetup(control.cameraControl)
         }catch (illegalStateException: IllegalStateException){
             illegalStateException.message?.let { Log.e("idk", it)
             }
@@ -223,6 +225,34 @@ class ScanFragment() : Fragment() {
                 requireContext(),
                 Manifest.permission.CAMERA
         ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun tapToFocusSetup(cameraControl:CameraControl){
+        // Listen to tap events on the viewfinder and set them as focus regions
+        previewView!!.setOnTouchListener(View.OnTouchListener setOnTouchListener@{ view: View, motionEvent: MotionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> return@setOnTouchListener true
+                MotionEvent.ACTION_UP -> {
+                    // Get the MeteringPointFactory from PreviewView
+                    val factory = SurfaceOrientedMeteringPointFactory(
+                            previewView!!.width.toFloat(), previewView!!.height.toFloat()
+                    )
+
+                    // Create a MeteringPoint from the tap coordinates
+                    val point = factory.createPoint(motionEvent.x, motionEvent.y)
+
+                    // Create a MeteringAction from the MeteringPoint, you can configure it to specify the metering mode
+                    val action = FocusMeteringAction.Builder(point).build()
+
+                    // Trigger the focus and metering. The method returns a ListenableFuture since the operation
+                    // is asynchronous. You can use it get notified when the focus is successful or if it fails.
+                    cameraControl.startFocusAndMetering(action)
+
+                    return@setOnTouchListener true
+                }
+                else -> return@setOnTouchListener false
+            }
+        })
     }
 
     companion object {
