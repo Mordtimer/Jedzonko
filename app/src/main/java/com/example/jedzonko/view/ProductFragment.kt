@@ -25,5 +25,6 @@ class ProductFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
         val textProductCode = view.findViewById<TextView>(R.id.textProductCode)
         textProductCode.text = productViewModel.productCode
+        productViewModel.addProduct()
     }
 }
