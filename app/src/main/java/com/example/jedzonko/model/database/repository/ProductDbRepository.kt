@@ -1,11 +1,10 @@
-package com.example.jedzonko.model.repository
+package com.example.jedzonko.model.database.repository
 
 import androidx.lifecycle.LiveData
-import com.example.jedzonko.model.ProductDB
-import com.example.jedzonko.model.ProductDao
-import java.util.*
+import com.example.jedzonko.model.database.ProductDB
+import com.example.jedzonko.model.database.ProductDao
 
-class ProductRepository(private val productDao: ProductDao) {
+class ProductDBRepository(private val productDao: ProductDao) {
     val readAll: LiveData<List<ProductDB>> = productDao.all()
 
     suspend fun add(product: ProductDB) {

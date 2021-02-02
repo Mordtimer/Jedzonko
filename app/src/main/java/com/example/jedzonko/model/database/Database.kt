@@ -1,4 +1,4 @@
-package com.example.jedzonko.model
+package com.example.jedzonko.model.database
 
 
 import android.content.Context
@@ -15,8 +15,8 @@ abstract class MyDatabase:RoomDatabase() {
         @Volatile
         private var INSTANCE: MyDatabase?=null
 
-        fun getDatabase(context: Context):MyDatabase{
-            val tempInstance=INSTANCE
+        fun getDatabase(context: Context): MyDatabase {
+            val tempInstance= INSTANCE
 
             if(tempInstance!=null)
                 return tempInstance
@@ -28,7 +28,7 @@ abstract class MyDatabase:RoomDatabase() {
                             MyDatabase::class.java,
                             "MyDatabase"
                     ).build()
-                    INSTANCE=instance
+                    INSTANCE =instance
                     return instance
                 }
         }

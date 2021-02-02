@@ -1,10 +1,8 @@
-package com.example.jedzonko.model
+package com.example.jedzonko.model.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import androidx.room.Dao
-import java.util.*
 
 @Dao
 interface ProductDao {

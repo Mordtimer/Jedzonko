@@ -1,4 +1,4 @@
-package com.example.jedzonko.model
+package com.example.jedzonko.model.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
