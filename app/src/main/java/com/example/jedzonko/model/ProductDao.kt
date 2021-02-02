@@ -10,13 +10,13 @@ import java.util.*
 interface ProductDao {
 
     @Insert
-    suspend fun insert(product: Product)
+    suspend fun insert(product: ProductDB)
 
     @Delete
-    suspend fun delete(product: Product)
+    suspend fun delete(product: ProductDB)
 
     @Query("SELECT * FROM productTable")
-    fun all():LiveData<List<Product>>
+    fun all():LiveData<List<ProductDB>>
 
     //@Update("")
 }
