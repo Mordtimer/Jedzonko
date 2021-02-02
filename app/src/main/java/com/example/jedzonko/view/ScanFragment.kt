@@ -63,7 +63,7 @@ class ScanFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupCamera(view)
-        Toast.makeText(context,"Tap to focus",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Tap to focus",Toast.LENGTH_SHORT).show()
 
     }
 
@@ -85,7 +85,7 @@ class ScanFragment() : Fragment() {
                 this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
         ).get(CameraXViewModel::class.java)
                 .processCameraProvider
-                .observe(viewLifecycleOwner, Observer { provider: ProcessCameraProvider? ->
+                .observe(viewLifecycleOwner, { provider: ProcessCameraProvider? ->
                     cameraProvider = provider
                     if (isCameraPermissionGranted()) {
                         bindPreviewUseCase()
@@ -178,7 +178,7 @@ class ScanFragment() : Fragment() {
                     barcodes.forEach {
                         it.rawValue?.let { it1 -> Log.d("Barcode", it1)}
                         if(it.rawValue != null){
-                            productViewModel.productCode = it.rawValue
+                            productViewModel.productCode = it.rawValue.toString()
                             imageProxy.close()
                             if(view != null)
                                 requireView().findNavController().navigate(R.id.action_scanFragment_to_productFragment)
