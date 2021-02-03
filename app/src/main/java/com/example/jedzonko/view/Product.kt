@@ -26,7 +26,8 @@ class Product : Fragment() {
         val repository = ProductRepository()
         val vmFactory = ProductVMFactory(requireActivity().application, repository)
         viewModel = ViewModelProvider(this,vmFactory).get(ProductVM::class.java)
-        viewModel.getProduct(args.barcode)
+        viewModel.setCode(args.barcode)
+        viewModel.getProductFromApi()
         viewModel.productResponse.observe(this,{
 
             if(it.isSuccessful) {
@@ -35,6 +36,7 @@ class Product : Fragment() {
                 view?.findViewById<TextView>(R.id.textProductCode)?.text = it.body()?.product?.Name?:"Nie Wyszlo"
                 binding.textProductCode.setText("XD")
             }
+            //TODO jak nie wyjdzie skan to coś tam
 
         })
     }
