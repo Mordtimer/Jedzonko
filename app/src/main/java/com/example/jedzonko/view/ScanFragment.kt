@@ -21,9 +21,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.jedzonko.MainActivity
 import com.example.jedzonko.R
-import com.example.jedzonko.viewModel.CameraXViewModel
-import com.example.jedzonko.viewModel.ProductViewModel
+import com.example.jedzonko.viewModel.CameraXVM
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
@@ -33,8 +34,10 @@ import kotlin.math.max
 import kotlin.math.min
 
 class ScanFragment() : Fragment() {
-    private lateinit var cameraXViewModel: CameraXViewModel
-    private lateinit var productViewModel: ProductViewModel
+    private lateinit var cameraXVM: CameraXVM
+    private lateinit var productCode: String
+
+    //private lateinit var productViewModel: ProductViewModel
     private var lensFacing = CameraSelector.LENS_FACING_BACK
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraSelector: CameraSelector? = null
@@ -53,8 +56,8 @@ class ScanFragment() : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        cameraXViewModel = ViewModelProvider(requireActivity()).get(CameraXViewModel::class.java)
-        productViewModel = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        cameraXVM = ViewModelProvider(requireActivity()).get(CameraXVM::class.java)
+        //productViewModel = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         return inflater.inflate(R.layout.scan_fragment, container, false)
     }
 
@@ -80,7 +83,7 @@ class ScanFragment() : Fragment() {
         cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
         ViewModelProvider(
                 this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
-        ).get(CameraXViewModel::class.java)
+        ).get(CameraXVM::class.java)
                 .processCameraProvider
                 .observe(viewLifecycleOwner, Observer { provider: ProcessCameraProvider? ->
                     cameraProvider = provider
@@ -174,10 +177,13 @@ class ScanFragment() : Fragment() {
                     barcodes.forEach {
                         it.rawValue?.let { it1 -> Log.d("Barcode", it1)}
                         if(it.rawValue != null){
-                            productViewModel.productCode = it.rawValue
+                            //productViewModel.productCode = it.rawValue
+                            productCode = it.rawValue!!
                             imageProxy.close()
-                            if(view != null)
-                                requireView().findNavController().navigate(R.id.action_scanFragment_to_productFragment)
+                            if(view != null) {
+                                val action = ScanFragmentDirections.actionScanFragmentToProductFragment(productCode)
+                                findNavController().navigate(action)
+                            }
                         }
                     }
                 }

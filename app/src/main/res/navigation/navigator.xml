@@ -25,11 +25,14 @@
     </fragment>
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.example.jedzonko.view.ProductFragment"
+        android:name="com.example.jedzonko.view.Product"
         android:label="product_fragment"
         tools:layout="@layout/product_fragment" >
         <action
             android:id="@+id/action_productFragment_to_scanFragment"
             app:destination="@id/scanFragment" />
+        <argument
+            android:name="barcode"
+            app:argType="string" />
     </fragment>
 </navigation>

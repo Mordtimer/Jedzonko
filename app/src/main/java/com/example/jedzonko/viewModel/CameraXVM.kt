@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutionException
  * View model for interacting with CameraX.
  * Create an instance which interacts with the camera service via the given application context.
  */
-class CameraXViewModel(application: Application) : AndroidViewModel(application) {
+class CameraXVM(application: Application) : AndroidViewModel(application) {
     private var cameraProviderLiveData: MutableLiveData<ProcessCameraProvider>? = null
 
     // Handle any errors (including cancellation) here.
