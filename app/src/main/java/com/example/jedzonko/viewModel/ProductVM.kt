@@ -9,6 +9,7 @@ import com.example.jedzonko.model.Product
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.Request
 import com.example.jedzonko.model.database.MyDatabase
+import com.example.jedzonko.model.database.NutrimentDB
 import com.example.jedzonko.model.database.ProductDB
 import com.example.jedzonko.model.database.repository.ProductDBRepository
 import kotlinx.coroutines.launch
@@ -25,9 +26,20 @@ class ProductVM(application: Application, private val repository: ProductReposit
             ProductDBRepository(MyDatabase.getDatabase(application).productDao())
 
     fun addProduct(){
-        val date: Date = Calendar.getInstance().time
-        viewModelScope.launch {
-            productRepository.add(ProductDB(id=0, productCode,null, date))
+        if(productResponse.value?.body() != null) {
+            val productResult = productResponse.value!!.body()!!.product
+            val date: Date = Calendar.getInstance().time
+            viewModelScope.launch {
+                val pr = ProductDB(id=0, productCode,productResult?.Name, date)
+                val nu = NutrimentDB(id=0,
+                    productResult.nutriments?.energykcal100g,
+                    productResult.nutrimentsLevel?.salt,
+                    productResult.nutrimentsLevel?.sugars,
+                    productResult.nutrimentsLevel?.fat,
+                    productResult.imageSmallUrl,0)
+                productRepository.add(pr, nu)
+            //todo ^ uczłowieczyć to wyżej ^
+            }
         }
     }
 

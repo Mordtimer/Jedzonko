@@ -32,7 +32,8 @@ class Product : Fragment() {
 
             if(it.isSuccessful) {
                 Log.d("Name", it.body()?.product?.Name?:"Nie Wyszlo")
-
+                if(it.body()?.product!=null)
+                    viewModel.addProduct()
                 view?.findViewById<TextView>(R.id.textProductCode)?.text = it.body()?.product?.Name?:"Nie Wyszlo"
                 binding.textProductCode.setText("XD")
             }

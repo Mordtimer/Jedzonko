@@ -8,7 +8,10 @@ import androidx.room.Dao
 interface ProductDao {
 
     @Insert
-    suspend fun insert(product: ProductDB)
+    suspend fun insertProduct(product: ProductDB): Long
+
+    @Insert
+    suspend fun insertNutriment(nutriment: NutrimentDB)
 
     @Delete
     suspend fun delete(product: ProductDB)

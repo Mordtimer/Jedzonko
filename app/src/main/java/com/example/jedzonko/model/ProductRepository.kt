@@ -9,6 +9,6 @@ import retrofit2.awaitResponse
 //private val api: ApiRequest
 class ProductRepository() {
     suspend fun getProduct(barcode: String): Response<Request> {
-        return RetrofitInstance.api.getProduct("5900334008381")
+        return RetrofitInstance.api.getProduct(barcode)
     }
 }
