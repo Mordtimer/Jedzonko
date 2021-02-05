@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.room.*
 import java.util.*
 
-@Database(entities = [ProductDB::class, NutrimentDB::class],version = 1,exportSchema = false)
+@Database(entities = [ProductDB::class, NutrimentDB::class, CalculatorDB::class],version = 1,exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class MyDatabase:RoomDatabase() {
 

@@ -29,15 +29,15 @@ class ProductVM(application: Application, private val repository: ProductReposit
         if(productResponse.value?.body() != null) {
             val productResult = productResponse.value!!.body()!!.product
             val date: Date = Calendar.getInstance().time
+
             viewModelScope.launch {
-                productRepository.add(ProductDB(id=0, productCode,productResult?.Name, date),
-                        NutrimentDB(id=0,
+                productRepository.add(ProductDB(productCode,productResult?.Name, date),
+                        NutrimentDB(productCode+"N",
                         productResult.nutriments?.energykcal100g,
                         productResult.nutrimentsLevel?.salt,
                         productResult.nutrimentsLevel?.sugars,
                         productResult.nutrimentsLevel?.fat,
-                        productResult.imageSmallUrl,0))
-            //todo ^ uczłowieczyć to wyżej ^
+                        productResult.imageSmallUrl,productCode))
             }
         }
     }
