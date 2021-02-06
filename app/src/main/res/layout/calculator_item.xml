@@ -4,68 +4,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/imgCalculatorProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:elevation="3dp"/>
 
     <TextView
         android:id="@+id/tvCalculatorName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:elevation="3dp"
         android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgCalculatorProduct"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="15pt"
+        android:layout_marginLeft="8dp"/>
 
     <TextView
         android:id="@+id/tvCalculatorMass"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/tvCalculatorName"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:elevation="3dp"
+        android:text="250g"
+        android:textSize="13pt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddProduct"
+        app:layout_constraintStart_toEndOf="@+id/imgCalculatorProduct"
+        app:layout_constraintTop_toBottomOf="@id/tvCalculatorName"
+        android:layout_marginLeft="8dp"/>
 
     <Button
         android:id="@+id/buttonSelectProduct"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCalculatorProduct"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="parent"
+        android:backgroundTint="@color/white"
+        />
 
     <Button
         android:id="@+id/buttonAddProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        app:layout_constraintStart_toEndOf="@+id/imgCalculatorProduct"
-        app:layout_constraintTop_toBottomOf="@+id/tvCalculatorName" />
+        android:elevation="3dp"
+
+        android:text="++"
+        app:layout_constraintEnd_toStartOf="@+id/tvNumber"
+        app:layout_constraintTop_toBottomOf="@id/tvCalculatorName" />
 
     <Button
         android:id="@+id/buttonDeleteProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
-        app:layout_constraintStart_toEndOf="@+id/buttonAddProduct"
-        app:layout_constraintTop_toTopOf="@+id/buttonAddProduct" />
+        android:text="--"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCalculatorName"
+        android:elevation="3dp"/>
 
     <TextView
         android:id="@+id/tvNumber"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
+        android:elevation="3dp"
         android:text="3"
-        android:textSize="24pt"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSelectProduct"
-        app:layout_constraintStart_toEndOf="@+id/imgCalculatorProduct" />
+        android:textSize="13pt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDeleteProduct"
+        app:layout_constraintTop_toBottomOf="@id/tvCalculatorName"
+        android:textAlignment="center"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

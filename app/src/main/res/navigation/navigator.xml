@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_scanFragment_to_productFragment"
             app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_scanFragment_to_notFoundFragment"
+            app:destination="@id/notFoundFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -22,6 +25,12 @@
         <action
             android:id="@+id/action_mainFragment_to_scanFragment"
             app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_calculatorFragment"
+            app:destination="@id/calculatorFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/productFragment"
@@ -34,5 +43,50 @@
         <argument
             android:name="barcode"
             app:argType="string" />
+        <action
+            android:id="@+id/action_productFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/notFoundFragment"
+        android:name="com.example.jedzonko.view.NotFoundFragment"
+        android:label="fragment_not_found"
+        tools:layout="@layout/not_found_fragment" >
+        <action
+            android:id="@+id/action_notFoundFragment_to_scanFragment"
+            app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/action_notFoundFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculatorFragment"
+        android:name="com.example.jedzonko.view.CalculatorFragment"
+        android:label="CalculatorFragment"
+        tools:layout="@layout/calculator_fragment">
+        <action
+            android:id="@+id/action_calculatorFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+        <action
+            android:id="@+id/action_calculatorFragment_to_scanFragment"
+            app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/action_calculatorFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.jedzonko.view.DetailsFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/details_fragment"/>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.jedzonko.view.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/history_fragment"/>
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="com.example.jedzonko.view.SummaryFragment"
+        android:label="SummaryFragment"
+        tools:layout="@layout/summary_fragment"/>
 </navigation>
