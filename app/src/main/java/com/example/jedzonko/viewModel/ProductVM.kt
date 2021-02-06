@@ -13,14 +13,48 @@ import com.example.jedzonko.model.database.repository.ProductDbRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.util.*
+import kotlin.reflect.full.memberProperties
 
 class ProductVM(application: Application, private val repository: ProductRepository) : AndroidViewModel(application) {
 
     val productResponse: MutableLiveData<Response<Request>> = MutableLiveData()
     var productCode:String = ""
+    val product: Product = productResponse.value!!.body()!!.product
 
     private val productRepository: ProductDbRepository =
             ProductDbRepository(MyDatabase.getDatabase(application).productDao())
+
+
+    fun getNutriments(): Map<String, String> {
+        // tworzy liste atrybutów klasy nutriments czyli wartości odżywczych
+        val tmp = product.nutriments.javaClass.kotlin.memberProperties
+        val names = mutableListOf<String>()
+        val values = mutableListOf<String>()
+        tmp.forEach{
+            // Jeżeli wartosć danego atrybutu jest różna od null dodaje go do listy
+            if(it.get(product.nutriments) != null){
+                names.add(it.name)
+                values.add(it.get(product.nutriments).toString())
+            }
+        }
+        return names.zip(values).toMap()
+    }
+
+    fun getIngredients(): Map<String, String> {
+        // tworzy liste atrybutów klasy ingredients czyli składników
+        val tmp = product.ingredients.javaClass.kotlin.memberProperties
+        val names = mutableListOf<String>()
+        val values = mutableListOf<String>()
+        tmp.forEach{
+            // Jeżeli wartosć danego atrybutu jest różna od null dodaje go do listy
+            if(it.get(product.ingredients) != null){
+                names.add(it.name)
+                values.add(it.get(product.ingredients).toString())
+            }
+        }
+        // zwraca zmapowaną liste stringów
+        return names.zip(values).toMap()
+    }
 
     fun addProduct(){
         if(productResponse.value?.body() != null) {
@@ -28,12 +62,12 @@ class ProductVM(application: Application, private val repository: ProductReposit
             val date: Date = Calendar.getInstance().time
 
             viewModelScope.launch {
-                productRepository.add(ProductDB(productCode,productResult?.Name, date),
+                productRepository.add(ProductDB(productCode,productResult.Name, date),
                         NutrimentDB(productCode+"N",
-                        productResult.nutriments?.energykcal100g,
-                        productResult.nutrimentsLevel?.salt,
-                        productResult.nutrimentsLevel?.sugars,
-                        productResult.nutrimentsLevel?.fat,
+                        productResult.nutriments.energykcal100g,
+                        productResult.nutrimentsLevel.salt,
+                        productResult.nutrimentsLevel.sugars,
+                        productResult.nutrimentsLevel.fat,
                         productResult.imageSmallUrl,productCode))
             }
         }

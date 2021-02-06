@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.example.jedzonko.R
 import com.example.jedzonko.databinding.ProductFragmentBinding
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.viewModel.ProductVM
