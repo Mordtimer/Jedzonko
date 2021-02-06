@@ -33,7 +33,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-class ScanFragment() : Fragment() {
+class ScanFragment() : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {
     private lateinit var cameraXVM: CameraXVM
     private lateinit var productCode: String
 
@@ -64,7 +64,6 @@ class ScanFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupCamera(view)
-
     }
 
     private fun toogleFlash(control: CameraControl){
@@ -85,17 +84,15 @@ class ScanFragment() : Fragment() {
                 this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
         ).get(CameraXVM::class.java)
                 .processCameraProvider
-                .observe(viewLifecycleOwner, Observer { provider: ProcessCameraProvider? ->
+                .observe(viewLifecycleOwner, { provider: ProcessCameraProvider? ->
                     cameraProvider = provider
                     if (isCameraPermissionGranted()) {
                         bindPreviewUseCase()
                         bindAnalyseUseCase()
                     } else {
-                        ActivityCompat.requestPermissions(
-                                requireActivity(),
-                                arrayOf(Manifest.permission.CAMERA),
-                                PERMISSION_CAMERA_REQUEST
-                        )
+                        requestPermissions(
+                            arrayOf(Manifest.permission.CAMERA),
+                            PERMISSION_CAMERA_REQUEST)
                     }
                 }
                 )
@@ -218,7 +215,8 @@ class ScanFragment() : Fragment() {
             if (isCameraPermissionGranted(requireContext())) {
                 setupCamera(requireView())
             } else {
-                Log.e(TAG, "no camera permission")
+                Log.i(TAG, "Permission to camera denied")
+                //todo jeśli nie przydzielone wyświetlić przycisk z ponownym uruchomieniem zapytania o uprawnienia
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
