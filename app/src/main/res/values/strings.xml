@@ -1,18 +1,17 @@
 <resources>
     <string name="app_name">Jedzonko</string>
-    <string name="scan">scanner</string>
-    <string name="calculator">nutrition calculator</string>
-    <string name="history">scan history</string>
+    <string name="scan">Wyszukaj produkt</string>
+    <string name="calculator">Kalkultor wartości odżywczych</string>
+    <string name="history">Historia produktów</string>
     <string name="addToCalc">Dodaj do kalkulatora</string>
     <string name="new_product">Nowy produkt</string>
     <string name="go_to_summary">Przejdź do podsumowania</string>
     <string name="seeDetails">Zobacz szczegóły</string>
     <string name="back">Wróć</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="backToMenu">Wróć do menu</string>
     <string name="tryAgain">Spróbuj ponownie</string>
     <string name="notFound1">Niestety kodu</string>
     <string name="notFound2">nie znaleziono w bazie danych. Sprawdź poprawność wczytanego kodu i spróbuj ponownie lub wróć do menu.</string>
     <string name="summaryTitle">Twoje podsumowanie dnia</string>
+    <string name="hello">Witaj w aplikacji</string>
 </resources>
