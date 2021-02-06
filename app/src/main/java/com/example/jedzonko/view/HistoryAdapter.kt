@@ -30,7 +30,8 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
         fun bind(product: ProductDB){
             binding.tvHistoryProductName.text = product.productName
             binding.tvDate.text = product.date.toString()
-            //binding.imgHistoryProduct;
+        // TODO co zrobić z obrazkami?
+        //binding.imgHistoryProduct;
         }
     }
 

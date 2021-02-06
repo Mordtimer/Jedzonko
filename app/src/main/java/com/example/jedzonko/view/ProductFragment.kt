@@ -14,15 +14,18 @@ import com.example.jedzonko.databinding.ProductFragmentBinding
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.viewModel.ProductVM
 import com.example.jedzonko.viewModel.ProductVMFactory
+import kotlin.reflect.full.memberProperties
 
 class ProductFragment : Fragment() {
+    private var _binding: ProductFragmentBinding? = null
     private lateinit var viewModel: ProductVM
     val args: ProductFragmentArgs by navArgs()
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ProductFragmentBinding.inflate(
-            layoutInflater)
+
         val repository = ProductRepository()
         val vmFactory = ProductVMFactory(requireActivity().application, repository)
         viewModel = ViewModelProvider(this,vmFactory).get(ProductVM::class.java)
@@ -34,8 +37,15 @@ class ProductFragment : Fragment() {
                 Log.d("Name", it.body()?.product?.Name?:"Nie Wyszlo")
                 if(it.body()?.product!=null)
                     viewModel.addProduct()
-                view?.findViewById<TextView>(R.id.tvProductName)?.text = it.body()?.product?.Name?:"Nie Wyszlo"
-                binding.tvProductName.setText("XD")
+                binding.tvProductName.text = it.body()?.product?.Name?:"Nie Wyszlo"
+
+                Log.d("Product: ", it.body()?.product.toString())
+                val tmp = it.body()?.product!!.nutriments.javaClass.kotlin.memberProperties
+                tmp.forEach{ c->
+                    val string = c.get(it.body()!!.product.nutriments)
+                    Log.d ( "Name: ${c.name}", "value: $string")
+                }
+                Log.d("Nutriments: ", tmp.toString())
             }
             //TODO jak nie wyjdzie skan to coś tam
 
@@ -49,7 +59,9 @@ class ProductFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.product_fragment, container, false)
+    ): View {
+        _binding = ProductFragmentBinding.inflate(
+            layoutInflater, container, false)
+        return binding.root
     }
 }
