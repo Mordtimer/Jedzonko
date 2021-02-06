@@ -16,7 +16,7 @@ class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>): Recycle
 
     inner class ViewHolder(private val binding: CalculatorItemBinding): RecyclerView.ViewHolder(binding.root){
         init {
-            // Navigacja
+            // Nawigacja
             binding.rowCalculator.setOnClickListener {
                 val currentBarcode = dataSet.value!![adapterPosition].barcode
                 val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(currentBarcode)
@@ -25,7 +25,7 @@ class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>): Recycle
         }
 
         fun bind(product: ProductDB){
-           binding.tvCalculatorName.text = product.productName
+            binding.tvCalculatorName.text = product.productName
             binding.tvCalculatorMass .text = product.date.toString()
         // TODO co zrobić z obrazkami?
         //binding.imgHistoryProduct;
@@ -33,7 +33,7 @@ class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>): Recycle
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = CalculatorItemBinding.inflate(LayoutInflater.from(parent.context))
+        binding = CalculatorItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
