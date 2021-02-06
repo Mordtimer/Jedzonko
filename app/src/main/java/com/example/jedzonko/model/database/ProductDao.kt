@@ -14,9 +14,6 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNutriment(nutriment: NutrimentDB)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCalculator(calculatorDB: CalculatorDB)
-
     @Delete
     suspend fun delete(product: ProductDB)
 
@@ -24,11 +21,11 @@ interface ProductDao {
     fun all():LiveData<List<ProductDB>>
 
     @Query("SELECT * FROM productTable WHERE barcode == :barcode")
-    fun getFromBarcode(barcode: String):LiveData<List<ProductDB>>
-/*
-    @Query("UPDATE productTable SET date = :date WHERE barcode == :barcode")
-    fun updateDate(date:Date, barcode: String):LiveData<List<ProductDB>>
-*/
+    fun getProductFromBarcode(barcode: String):LiveData<List<ProductDB>>
+
+    @Query("SELECT * FROM nutrimentTable WHERE barcode == :barcode")
+    fun getNutrimentFromBarcode(barcode: String):LiveData<List<NutrimentDB>>
+
     @Update()
     fun updateProduct(product: ProductDB)
 }

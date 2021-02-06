@@ -14,11 +14,5 @@ class ProductDBRepository(private val productDao: ProductDao) {
             productDao.insertNutriment(nutriment)
     }
 
-    suspend fun addProductToCalculator(product: ProductDB, nutriment: NutrimentDB, calculator: CalculatorDB){
-        productDao.insertProduct(product)
-        productDao.insertNutriment(nutriment)
-        productDao.insertCalculator(calculator)
-    }
-
-    suspend fun delete(product: ProductDB) = productDao.delete(product)
+    suspend fun deleteProduct(product: ProductDB) = productDao.delete(product)
 }
