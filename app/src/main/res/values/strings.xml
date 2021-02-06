@@ -3,4 +3,9 @@
     <string name="scan">scanner</string>
     <string name="calculator">nutrition calculator</string>
     <string name="history">scan history</string>
+    <string name="addToCalc">Dodaj do kalkulatora</string>
+    <string name="new_product">Nowy produkt</string>
+    <string name="go_to_summary">Przejdź do podsumowania</string>
+    <string name="seeDetails">Zobacz szczegóły</string>
+    <string name="back">Wróć</string>
 </resources>
