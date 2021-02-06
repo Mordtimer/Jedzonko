@@ -15,9 +15,9 @@ import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.viewModel.ProductVM
 import com.example.jedzonko.viewModel.ProductVMFactory
 
-class Product : Fragment() {
+class ProductFragment : Fragment() {
     private lateinit var viewModel: ProductVM
-    val args: ProductArgs by navArgs()
+    val args: ProductFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
