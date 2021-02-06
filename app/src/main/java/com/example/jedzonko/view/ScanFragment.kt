@@ -67,7 +67,7 @@ class ScanFragment() : Fragment() {
 
     }
 
-    private fun toogleFlash(control: CameraControl){
+    private fun toggleFlash(control: CameraControl){
             val flashButton = requireView().findViewById<ToggleButton>(R.id.toggleButtonFlash)
             flashButton.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
@@ -120,7 +120,7 @@ class ScanFragment() : Fragment() {
                     cameraSelector!!,
                     previewUseCase
             )
-            toogleFlash(control.cameraControl)
+            toggleFlash(control.cameraControl)
         }catch (illegalStateException: IllegalStateException){
             illegalStateException.message?.let { Log.e("idk", it)
             }

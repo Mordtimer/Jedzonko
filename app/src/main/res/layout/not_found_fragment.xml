@@ -4,28 +4,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.Product"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvProductName"
-        android:layout_width="0dp"
+        android:id="@+id/tvBarcodeNotFound"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:text="barcode"
         android:textSize="15pt"
-        tools:text="Nazwa produktu"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgProduct"
+    <Button
+        android:id="@+id/buttonTryAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="TryAgain"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBarcodeNotFound" />
 
+    <Button
+        android:id="@+id/buttonReturnToMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ReturnToMenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTryAgain" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
