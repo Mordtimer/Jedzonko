@@ -53,7 +53,7 @@ class ProductVM(application: Application, private val repository: ProductReposit
                 values.add(it.get(product.ingredients).toString())
             }
         }
-        // zwraca zmapowaną list stringów
+        // zwraca zmapowaną liste stringów
         return names.zip(values).toMap()
     }
 
@@ -63,7 +63,7 @@ class ProductVM(application: Application, private val repository: ProductReposit
             val date: Date = Calendar.getInstance().time
 
             viewModelScope.launch {
-                productRepository.add(ProductDB(productCode,productResult?.Name, date),
+                productRepository.add(ProductDB(productCode,productResult.Name, date),
                         NutrimentDB(productCode+"N",
                         productResult.nutriments.energykcal100g,
                         productResult.nutrimentsLevel.salt,
