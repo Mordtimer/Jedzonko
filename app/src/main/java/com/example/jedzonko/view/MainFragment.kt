@@ -25,6 +25,9 @@ class MainFragment() : Fragment(){
         view.findViewById<Button>(R.id.buttonScan).setOnClickListener {
             view.findNavController().navigate(R.id.action_mainFragment_to_scanFragment)
         }
+        view.findViewById<Button>(R.id.buttonHistory).setOnClickListener {
+            view.findNavController().navigate(R.id.action_mainFragment_to_historyFragment)
+        }
         //todo
         //view.findViewById<BottomNavigationView>(R.id.bottomNavigation).setOnNavigationItemSelectedListener {
         //when(it.itemId){
