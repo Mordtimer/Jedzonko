@@ -21,10 +21,10 @@ interface ProductDao {
     fun all():LiveData<List<ProductDB>>
 
     @Query("SELECT * FROM productTable WHERE barcode == :barcode")
-    fun getProductFromBarcode(barcode: String):LiveData<List<ProductDB>>
+    fun getProductFromBarcode(barcode: String):LiveData<ProductDB>
 
     @Query("SELECT * FROM nutrimentTable WHERE barcode == :barcode")
-    fun getNutrimentFromBarcode(barcode: String):LiveData<List<NutrimentDB>>
+    fun getNutrimentFromBarcode(barcode: String):LiveData<NutrimentDB>
 
     @Update()
     fun updateProduct(product: ProductDB)
