@@ -41,17 +41,19 @@ class ProductFragment : Fragment() {
                         tvSaturatedValue.text = viewModel.product.value!!.nutrimentsLevel.saturatedFat
                         tvSugarsValue.text = viewModel.product.value!!.nutrimentsLevel.sugars
                     }
+                    Log.d("Product: ", it.body()?.product.toString())
+                    val tmp = it.body()?.product!!.nutriments.javaClass.kotlin.memberProperties
+                    tmp.forEach { c ->
+                        val string = c.get(it.body()!!.product.nutriments)
+                        Log.d("Name: ${c.name}", "value: $string")
+                    }
+                    Log.d("Nutriments: ", tmp.toString())
                 }
-
-                Log.d("Product: ", it.body()?.product.toString())
-                val tmp = it.body()?.product!!.nutriments.javaClass.kotlin.memberProperties
-                tmp.forEach { c ->
-                    val string = c.get(it.body()!!.product.nutriments)
-                    Log.d("Name: ${c.name}", "value: $string")
+                else{
+                    val action = ProductFragmentDirections.actionProductFragmentToNotFoundFragment2(viewModel.productCode)
+                    findNavController().navigate(action)
                 }
-                Log.d("Nutriments: ", tmp.toString())
             }
-            //TODO jak nie wyjdzie skan to coś tam
         })
     }
 

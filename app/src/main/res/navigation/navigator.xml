@@ -14,9 +14,6 @@
             android:id="@+id/action_scanFragment_to_productFragment"
             app:destination="@id/productFragment" />
         <action
-            android:id="@+id/action_scanFragment_to_notFoundFragment"
-            app:destination="@id/notFoundFragment" />
-        <action
             android:id="@+id/action_scanFragment_self"
             app:destination="@id/scanFragment" />
     </fragment>
@@ -52,6 +49,9 @@
         <action
             android:id="@+id/action_productFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_notFoundFragment2"
+            app:destination="@id/notFoundFragment" />
     </fragment>
     <fragment
         android:id="@+id/notFoundFragment"
@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_notFoundFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="barcode"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/calculatorFragment"
