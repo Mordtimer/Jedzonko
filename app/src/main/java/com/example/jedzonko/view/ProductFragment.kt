@@ -51,7 +51,6 @@ class ProductFragment : Fragment() {
                 Log.d("Nutriments: ", tmp.toString())
             }
             //TODO jak nie wyjdzie skan to coś tam
-
         })
     }
 
