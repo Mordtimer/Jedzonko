@@ -20,5 +20,5 @@ class CalculatorVM(application: Application) : AndroidViewModel(application) {
 
     //private val productRepository: CalculatorDbRepository =
       //  CalculatorDbRepository(MyDatabase.getDatabase(application).calculatorDao(), MyDatabase.getDatabase(application).productDao())
-    //val products: LiveData<ProductDB> = productRepository.readAll()
+    //val products: LiveData<List<ProductDB>> = productRepository.readAll()
 }

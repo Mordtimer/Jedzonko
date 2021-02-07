@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.jedzonko.R
 import com.example.jedzonko.databinding.HistoryItemBinding
 import com.example.jedzonko.model.database.ProductDB
 import java.io.InputStream
@@ -23,19 +25,15 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
         init {
             binding.rowHistoryItem.setOnClickListener {
                 val currentBarcode = dataSet.value?.get(adapterPosition)?.barcode
-            // TODO Zaimplementować nawigacje (Marcin nie utworzył jeszcze klasy od fragmentu i nie mogłem tego zrobić)
-                //Klasa zaimplementowana
-
-                //val action = HistoryFragmentDirections.
-                //actionHistoryFragmentToProduct(currentBarcode)
-                //findNavController.navigate(action)
-
+                val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(currentBarcode!!)
+                Navigation.findNavController(it).navigate(action)
             }
         }
 
         fun bind(product: ProductDB){
             binding.tvHistoryProductName.text = product.productName
             binding.tvDate.text = product.date.toString()
+            //todo
             /*skąd wziąć url??
             var bitmap: Bitmap = BitmapFactory.decodeStream((InputStream)new URL(product.))
             binding.imgHistoryProduct.
