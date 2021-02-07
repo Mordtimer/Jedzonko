@@ -17,12 +17,6 @@ class NotFoundFragment : Fragment(R.layout.not_found_fragment) {
 
     val args: NotFoundFragmentArgs by navArgs()
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvBarcodeNotFound.text = args.barcode

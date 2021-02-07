@@ -21,17 +21,23 @@ class ProductFragment : Fragment() {
     val args: ProductFragmentArgs by navArgs()
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val repository = ProductRepository()
         val vmFactory = ProductVMFactory(requireActivity().application, repository)
         viewModel = ViewModelProvider(this, vmFactory).get(ProductVM::class.java)
         viewModel.setCode(args.barcode)
 
-        viewModel.productsFromDB.observe(this,{
+        viewModel.productsFromDB.observe(viewLifecycleOwner,{
             if (!viewModel.isProductInDb()) {
                 viewModel.getProductFromApi()
-                viewModel.productResponse.observe(this, {
+                viewModel.productResponse.observe(viewLifecycleOwner, {
 
                     if (it.isSuccessful) {
                         if (it.body()?.product != null) {
@@ -56,28 +62,18 @@ class ProductFragment : Fragment() {
                 })
             } else {
                 viewModel.isProductInDb()
-                viewModel.productFromDB!!.observe(this,{
+                viewModel.productFromDB!!.observe(viewLifecycleOwner,{
                     binding.tvProductName.text = viewModel.productFromDB!!.value!!.productName})
-                viewModel.nutrimentFromDB!!.observe(this, {
+                viewModel.nutrimentFromDB!!.observe(viewLifecycleOwner, {
                     binding.tvFatValue.text = viewModel.nutrimentFromDB!!.value!!.fat
                     binding.tvSaltValue.text = viewModel.nutrimentFromDB!!.value!!.salt
                     binding.tvSaturatedValue.text =
-                            viewModel.nutrimentFromDB!!.value!!.saturatedFat
+                        viewModel.nutrimentFromDB!!.value!!.saturatedFat
                     binding.tvSugarsValue.text = viewModel.nutrimentFromDB!!.value!!.sugars
-            })
-                viewModel.updateProduct()
+                })
+                //viewModel.updateProduct()
             }
         })
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
         _binding = ProductFragmentBinding.inflate(
             layoutInflater, container, false)
 

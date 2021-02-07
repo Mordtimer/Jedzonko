@@ -27,16 +27,6 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
     private lateinit var  historyAdapter: RecyclerView.Adapter<*>
     private lateinit var products: LiveData<List<ProductDB>>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val repository = ProductRepository()
-        val vmFactory = HistoryVMFactory(requireActivity().application, repository)
-        viewModel = ViewModelProvider(this,vmFactory).get(HistoryVM::class.java)
-        historyAdapter = HistoryAdapter(viewModel.products)
-        products = viewModel.products
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.rvHistory
@@ -48,6 +38,11 @@ class HistoryFragment : Fragment(R.layout.history_fragment) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val repository = ProductRepository()
+        val vmFactory = HistoryVMFactory(requireActivity().application, repository)
+        viewModel = ViewModelProvider(this,vmFactory).get(HistoryVM::class.java)
+        historyAdapter = HistoryAdapter(viewModel.products)
+        products = viewModel.products
         _binding = HistoryFragmentBinding.inflate(
             layoutInflater, container, false)
         products.observe(viewLifecycleOwner,{

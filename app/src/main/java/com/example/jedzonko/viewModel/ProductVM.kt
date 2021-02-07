@@ -125,10 +125,11 @@ class ProductVM(application: Application, private val repository: ProductReposit
             )
         }
     }
-
+/*
     fun updateProduct(){
         viewModelScope.launch {
             productRepository.add(productFromDB?.value!!, nutrimentFromDB?.value!!)
         }
     }
+    */
 }

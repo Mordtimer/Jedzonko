@@ -33,16 +33,6 @@ class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
     private lateinit var  products: LiveData<List<ProductDB>>
     private lateinit var  quantities: LiveData<List<CalculatorDB>>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val vmFactory = CalculatorVMFactory(requireActivity().application)
-        viewModel = ViewModelProvider(this,vmFactory).get(CalculatorVM::class.java)
-        calculatorAdapter = CalculatorAdapter(viewModel.products, viewModel.quantities, viewModel)
-        products = viewModel.products
-        quantities = viewModel.quantities
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.rvCalculator
@@ -63,6 +53,11 @@ class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val vmFactory = CalculatorVMFactory(requireActivity().application)
+        viewModel = ViewModelProvider(this,vmFactory).get(CalculatorVM::class.java)
+        calculatorAdapter = CalculatorAdapter(viewModel.products, viewModel.quantities, viewModel)
+        products = viewModel.products
+        quantities = viewModel.quantities
         _binding = CalculatorFragmentBinding.inflate(
             layoutInflater, container, false)
         products.observe(viewLifecycleOwner,{
