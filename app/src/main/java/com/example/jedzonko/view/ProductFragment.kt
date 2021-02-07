@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.jedzonko.databinding.ProductFragmentBinding
 import com.example.jedzonko.model.ProductRepository
@@ -64,6 +65,16 @@ class ProductFragment : Fragment() {
     ): View {
         _binding = ProductFragmentBinding.inflate(
             layoutInflater, container, false)
+
+        binding.btAdd.setOnClickListener {
+            //TODO
+            // Dodać dodawanie do kalkulatora
+        }
+        binding.btDetails.setOnClickListener {
+            val action = ProductFragmentDirections.actionProductFragmentToDetailsFragment()
+            findNavController().navigate(action)
+        }
+
         return binding.root
     }
 }
