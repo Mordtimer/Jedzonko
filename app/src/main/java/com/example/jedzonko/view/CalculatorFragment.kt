@@ -30,7 +30,6 @@ class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
 
     private lateinit var  recyclerView: RecyclerView
     private lateinit var  calculatorAdapter: RecyclerView.Adapter<*>
-    private lateinit var  viewManager: RecyclerView.LayoutManager
     private lateinit var  products: LiveData<List<ProductDB>>
     private lateinit var  quantities: LiveData<List<CalculatorDB>>
 
@@ -39,7 +38,6 @@ class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
         val vmFactory = CalculatorVMFactory(requireActivity().application)
         viewModel = ViewModelProvider(this,vmFactory).get(CalculatorVM::class.java)
         calculatorAdapter = CalculatorAdapter(viewModel.products, viewModel.quantities, viewModel)
-        viewManager = LinearLayoutManager(this.context)
         products = viewModel.products
         quantities = viewModel.quantities
 
@@ -49,7 +47,7 @@ class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.rvCalculator
         recyclerView.adapter = calculatorAdapter
-        recyclerView.layoutManager = viewManager
+        recyclerView.layoutManager = LinearLayoutManager(activity)
 
         view.findViewById<Button>(R.id.buttonSummary).setOnClickListener {
             view.findNavController().navigate(R.id.action_calculatorFragment_to_summaryFragment)

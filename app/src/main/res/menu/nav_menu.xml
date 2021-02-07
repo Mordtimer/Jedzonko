@@ -4,19 +4,19 @@
     <item
         android:id="@+id/menuHome"
         android:icon="@drawable/ic_menu_home"
-        android:title="Home"
+        android:title="@string/home"
         tools:layout="@layout/main_fragment"
         />
     <item
         android:id="@+id/menuCalculator"
         android:icon="@drawable/ic_menu_calculator"
-        android:title="Calculator"
+        android:title="@string/calc"
         tools:layout="@layout/calculator_fragment"
         />
     <item
         android:id="@+id/menuScanner"
         android:icon="@drawable/ic_search"
-        android:title="Scanner"
+        android:title="@string/search"
         tools:layout="@layout/scan_fragment"
         />
 </menu>
