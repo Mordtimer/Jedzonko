@@ -12,22 +12,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/summaryTitle"
-        android:textSize="13pt"
+        android:textSize="13.5pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSummary"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        tools:listitem="@layout/summary_item"
-        app:layout_constraintTop_toBottomOf="@id/tvSummaryTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBackToCalculator"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/buttonBackToCalculator"
@@ -36,5 +25,182 @@
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summaryCalories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSummaryTitle"
+        android:textSize="11pt"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvSalt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summarySalt"
+        android:textSize="11pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCalories"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvFat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summaryFat"
+        android:textSize="11pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSalt"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvSaturatedSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summaryFatSaturated"
+        android:textSize="11pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFat"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvCaloriesSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/2000"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCalories"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvCalories"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvCaloriesInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="150"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCalories"
+        app:layout_constraintEnd_toStartOf="@id/tvCaloriesSum"
+        app:layout_constraintTop_toTopOf="@+id/tvCalories"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvSaltSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/6"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSalt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSalt"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvSaltInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="3.3"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSalt"
+        app:layout_constraintEnd_toStartOf="@id/tvSaltSum"
+        app:layout_constraintTop_toTopOf="@+id/tvSalt"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvFatSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/70"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvFat"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvFatInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="33"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFat"
+        app:layout_constraintEnd_toStartOf="@id/tvFatSum"
+        app:layout_constraintTop_toTopOf="@+id/tvFat"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvSaturatedSummarySum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/18"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSaturatedSummary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSaturatedSummary"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvSaturatedSummaryInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="12.2"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSaturatedSummary"
+        app:layout_constraintEnd_toStartOf="@id/tvSaturatedSummarySum"
+        app:layout_constraintTop_toTopOf="@+id/tvSaturatedSummary"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvSugars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summarySugars"
+        android:textSize="11pt"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSaturatedSummary" />
+
+    <TextView
+        android:id="@+id/tvSugarsSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/24"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSugars"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSugars"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvSugarsInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="12.2"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSugars"
+        app:layout_constraintEnd_toStartOf="@id/tvSugarsSum"
+        app:layout_constraintTop_toTopOf="@+id/tvSugars"
+        android:textSize="11pt" />
+
+    <TextView
+        android:id="@+id/tvSummaryComment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/buttonBackToCalculator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSummary"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:textSize="10pt"/>
+
+
+    <ImageView
+        android:id="@+id/imgSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSugars"
+        tools:src="@tools:sample/avatars"
+        android:layout_marginTop="24dp"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

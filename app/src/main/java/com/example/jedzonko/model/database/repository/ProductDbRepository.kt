@@ -19,5 +19,7 @@ class ProductDbRepository(private val productDao: ProductDao) {
 
     fun getNutriment(barcode:String) : LiveData<NutrimentDB> = productDao.getNutrimentFromBarcode(barcode)
 
+    fun allNutriments() : LiveData<List<NutrimentDB>> = productDao.allNutriments()
+
     suspend fun deleteProduct(product: ProductDB) = productDao.delete(product)
 }

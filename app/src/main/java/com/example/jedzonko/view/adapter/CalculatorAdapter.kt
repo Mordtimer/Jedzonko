@@ -10,6 +10,7 @@ import com.example.jedzonko.databinding.CalculatorItemBinding
 import com.example.jedzonko.model.database.ProductDB
 import androidx.navigation.Navigation.findNavController
 import com.example.jedzonko.model.database.CalculatorDB
+import com.example.jedzonko.util.Constants
 import com.example.jedzonko.view.adapter.Bitmap
 import com.example.jedzonko.viewModel.CalculatorVM
 import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
@@ -37,7 +38,7 @@ class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>, private 
             //todo: naprawić jednostki może dodać buttony ++ / --
             for(q in quantity.value!!){
                 if(q.barcode == product.barcode){
-                    binding.tvCalculatorMass.text = (100*q.quantity).toString()
+                    binding.tvCalculatorMass.text = (Constants.NUTRIMENT_BASE*q.quantity).toString()
                     binding.tvNumber.text = q.quantity.toString()
                 }
             }
