@@ -63,13 +63,16 @@ class ProductVM(application: Application, private val repository: ProductReposit
             val date: Date = Calendar.getInstance().time
 
             viewModelScope.launch {
-                productRepository.add(ProductDB(productCode,productResult.Name, date),
-                        NutrimentDB(productCode+"N",
+                productRepository.add(
+                    ProductDB(productCode,
+                        productResult.Name,
+                        productResult.imageSmallUrl,
+                        date),
+                    NutrimentDB(productCode+"N",
                         productResult.nutriments.energykcal100g,
                         productResult.nutrimentsLevel.salt,
                         productResult.nutrimentsLevel.sugars,
-                        productResult.nutrimentsLevel.fat,
-                        productResult.imageSmallUrl,productCode))
+                        productResult.nutrimentsLevel.fat,productCode))
             }
             product.value = productResponse.value!!.body()!!.product
         }
