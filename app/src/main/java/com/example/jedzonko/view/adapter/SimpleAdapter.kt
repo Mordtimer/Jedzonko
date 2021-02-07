@@ -1,4 +1,4 @@
-package com.example.jedzonko.view
+package com.example.jedzonko.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ class SimpleAdapter(private val dataSet: Map<String, String>):
     }
 
     lateinit var binding: NutrimentsItemBinding
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = NutrimentsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }

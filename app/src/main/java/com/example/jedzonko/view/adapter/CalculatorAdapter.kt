@@ -1,4 +1,4 @@
-package com.example.jedzonko.view
+package com.example.jedzonko.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jedzonko.databinding.CalculatorItemBinding
 import com.example.jedzonko.model.database.ProductDB
 import androidx.navigation.Navigation.findNavController
-
-import java.util.*
+import com.example.jedzonko.view.HistoryFragmentDirections
 
 class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerView.Adapter<CalculatorAdapter.ViewHolder>() {
 
@@ -19,7 +18,8 @@ class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>): Recycle
             // Nawigacja
             binding.rowCalculator.setOnClickListener {
                 val currentBarcode = dataSet.value!![adapterPosition].barcode
-                val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(currentBarcode)
+                val action =
+                    HistoryFragmentDirections.actionHistoryFragmentToProductFragment(currentBarcode)
                 findNavController(binding.root).navigate(action)
             }
         }

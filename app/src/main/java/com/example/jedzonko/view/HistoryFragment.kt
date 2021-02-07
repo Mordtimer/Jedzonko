@@ -13,6 +13,7 @@ import com.example.jedzonko.R
 import com.example.jedzonko.databinding.HistoryFragmentBinding
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.database.ProductDB
+import com.example.jedzonko.view.adapter.HistoryAdapter
 import com.example.jedzonko.viewModel.HistoryVM
 import com.example.jedzonko.viewModel.HistoryVMFactory
 
