@@ -10,12 +10,15 @@ import com.example.jedzonko.databinding.CalculatorItemBinding
 import com.example.jedzonko.model.database.ProductDB
 import androidx.navigation.Navigation.findNavController
 import com.example.jedzonko.model.database.CalculatorDB
+import com.example.jedzonko.view.adapter.Bitmap
 import com.example.jedzonko.viewModel.CalculatorVM
 import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
+import kotlinx.coroutines.*
 
 import java.util.*
 
-class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>, private val quantity: LiveData<List<CalculatorDB>>, private val vm: CalculatorVM): RecyclerView.Adapter<CalculatorAdapter.ViewHolder>() {
+class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>, private val quantity: LiveData<List<CalculatorDB>>, private val vm: CalculatorVM): RecyclerView.Adapter<CalculatorAdapter.ViewHolder>(),
+    Bitmap {
 
     lateinit var binding: CalculatorItemBinding
 
@@ -52,9 +55,15 @@ class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>, private 
 
                 notifyDataSetChanged()
             }
-
-        // TODO co zrobić z obrazkami?
-        //binding.imgHistoryProduct;
+            val result: Deferred<android.graphics.Bitmap?> = GlobalScope.async {
+                getBitmapFromURL(product.label)
+            }
+            GlobalScope.launch(Dispatchers.Main) {
+                val bitmap = result.await()
+                bitmap.apply {
+                    binding.imgCalculatorProduct.setImageBitmap(bitmap)
+                }
+            }
         }
     }
 
