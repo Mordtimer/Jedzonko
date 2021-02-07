@@ -1,22 +1,18 @@
-package com.example.jedzonko.view
+package com.example.jedzonko.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.lifecycle.LiveData
-import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jedzonko.R
 import com.example.jedzonko.databinding.HistoryItemBinding
 import com.example.jedzonko.model.database.ProductDB
-import java.io.InputStream
-import java.net.URL
+import com.example.jedzonko.view.HistoryFragmentDirections
+import kotlinx.coroutines.*
 import java.util.*
-import androidx.navigation.Navigation.findNavController
 
-class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+
+class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Bitmap {
 
     lateinit var binding: HistoryItemBinding
 
@@ -24,20 +20,26 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
         init {
             binding.rowHistoryItem.setOnClickListener {
                 val currentBarcode = dataSet.value!![adapterPosition].barcode
-                //Zaimplementować nawigacje (Marcin nie utworzył jeszcze klasy od fragmentu i nie mogłem tego zrobić)
-                val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(currentBarcode)
+                val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(
+                    currentBarcode
+                )
                 findNavController(binding.root).navigate(action)
             }
         }
 
         fun bind(product: ProductDB){
+            val result: Deferred<android.graphics.Bitmap?> = GlobalScope.async {
+                getBitmapFromURL(product.label)
+            }
             binding.tvHistoryProductName.text = product.productName
             binding.tvDate.text = product.date.toString()
-            //todo
-            /*skąd wziąć url??
-            var bitmap: Bitmap = BitmapFactory.decodeStream((InputStream)new URL(product.))
-            binding.imgHistoryProduct.
-             */
+
+            GlobalScope.launch(Dispatchers.Main) {
+                val bitmap = result.await()
+                bitmap.apply {
+                    binding.imgHistoryProduct.setImageBitmap(bitmap)
+                }
+            }
         }
     }
 
@@ -48,9 +50,10 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product: ProductDB = dataSet.value?.get(position) ?:
-        ProductDB("","", "", Date())
+        ProductDB("", "", "", Date())
         holder.bind(product)
     }
 
     override fun getItemCount(): Int = dataSet.value?.size?:0
+
 }
