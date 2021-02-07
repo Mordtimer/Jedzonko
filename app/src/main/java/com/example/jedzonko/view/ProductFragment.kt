@@ -27,32 +27,51 @@ class ProductFragment : Fragment() {
         val vmFactory = ProductVMFactory(requireActivity().application, repository)
         viewModel = ViewModelProvider(this, vmFactory).get(ProductVM::class.java)
         viewModel.setCode(args.barcode)
-        viewModel.getProductFromApi()
-        viewModel.productResponse.observe(this, {
+        viewModel.productsFromDB.observe(this,{
+            if (!viewModel.isProductInDb()) {
+                viewModel.getProductFromApi()
+                viewModel.productResponse.observe(this, {
 
-            if (it.isSuccessful) {
-                Log.d("Name", it.body()?.product?.Name ?: "Nie Wyszlo")
-                if (it.body()?.product != null) {
-                    viewModel.addProduct()
-                    binding.apply {
-                        tvProductName.text = viewModel.product.value!!.Name
-                        tvFatValue.text = viewModel.product.value!!.nutrimentsLevel.fat
-                        tvSaltValue.text = viewModel.product.value!!.nutrimentsLevel.salt
-                        tvSaturatedValue.text = viewModel.product.value!!.nutrimentsLevel.saturatedFat
-                        tvSugarsValue.text = viewModel.product.value!!.nutrimentsLevel.sugars
+                    if (it.isSuccessful) {
+                        Log.d("Name", it.body()?.product?.Name ?: "Nie Wyszlo")
+                        if (it.body()?.product != null) {
+                            viewModel.addProduct()
+                            binding.apply {
+                                tvProductName.text = viewModel.product.value!!.Name
+                                tvFatValue.text = viewModel.product.value!!.nutrimentsLevel.fat
+                                tvSaltValue.text = viewModel.product.value!!.nutrimentsLevel.salt
+                                tvSaturatedValue.text =
+                                    viewModel.product.value!!.nutrimentsLevel.saturatedFat
+                                tvSugarsValue.text =
+                                    viewModel.product.value!!.nutrimentsLevel.sugars
+                            }
+                            Log.d("Product: ", it.body()?.product.toString())
+                            val tmp =
+                                it.body()?.product!!.nutriments.javaClass.kotlin.memberProperties
+                            tmp.forEach { c ->
+                                val string = c.get(it.body()!!.product.nutriments)
+                                Log.d("Name: ${c.name}", "value: $string")
+                            }
+                            Log.d("Nutriments: ", tmp.toString())
+                        } else {
+                            val action =
+                                ProductFragmentDirections.actionProductFragmentToNotFoundFragment2(
+                                    viewModel.productCode
+                                )
+                            findNavController().navigate(action)
+                        }
                     }
-                    Log.d("Product: ", it.body()?.product.toString())
-                    val tmp = it.body()?.product!!.nutriments.javaClass.kotlin.memberProperties
-                    tmp.forEach { c ->
-                        val string = c.get(it.body()!!.product.nutriments)
-                        Log.d("Name: ${c.name}", "value: $string")
-                    }
-                    Log.d("Nutriments: ", tmp.toString())
-                }
-                else{
-                    val action = ProductFragmentDirections.actionProductFragmentToNotFoundFragment2(viewModel.productCode)
-                    findNavController().navigate(action)
-                }
+                })
+            } else {
+                viewModel.productFromDB!!.observe(this,{
+                    binding.tvProductName.text = viewModel.productFromDB!!.value!!.productName})
+                viewModel.nutrimentFromDB!!.observe(this, {
+                    binding.tvFatValue.text = viewModel.nutrimentFromDB!!.value!!.fat
+                    binding.tvSaltValue.text = viewModel.nutrimentFromDB!!.value!!.salt
+                    binding.tvSaturatedValue.text =
+                            viewModel.nutrimentFromDB!!.value!!.saturatedFat
+                    binding.tvSugarsValue.text = viewModel.nutrimentFromDB!!.value!!.sugars
+            })
             }
         })
     }
@@ -72,6 +91,7 @@ class ProductFragment : Fragment() {
             //TODO
             // Dodać dodawanie do kalkulatora
         }
+
         binding.btDetails.setOnClickListener {
             val action = ProductFragmentDirections.actionProductFragmentToDetailsFragment()
             findNavController().navigate(action)

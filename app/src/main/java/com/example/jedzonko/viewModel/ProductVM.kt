@@ -2,6 +2,7 @@ package com.example.jedzonko.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.jedzonko.model.Product
@@ -21,10 +22,14 @@ class ProductVM(application: Application, private val repository: ProductReposit
     val productResponse: MutableLiveData<Response<Request>> = MutableLiveData()
     var productCode:String = ""
     val product:MutableLiveData<Product> = MutableLiveData()
+    var productFromDB:LiveData<ProductDB>? = null
+    var nutrimentFromDB:LiveData<NutrimentDB>? = null
+
 
     private val productRepository: ProductDbRepository =
             ProductDbRepository(MyDatabase.getDatabase(application).productDao())
 
+    val productsFromDB:LiveData<List<ProductDB>> = productRepository.readAll
 
     fun getNutriments(): Map<String, String> {
         // tworzy liste atrybutów klasy nutriments czyli wartości odżywczych
@@ -72,7 +77,9 @@ class ProductVM(application: Application, private val repository: ProductReposit
                         productResult.nutriments.energykcal100g,
                         productResult.nutrimentsLevel.salt,
                         productResult.nutrimentsLevel.sugars,
-                        productResult.nutrimentsLevel.fat,productCode))
+                        productResult.nutrimentsLevel.fat,
+                        productResult.nutrimentsLevel.saturatedFat
+                        ,productCode))
             }
             product.value = productResponse.value!!.body()!!.product
         }
@@ -87,5 +94,18 @@ class ProductVM(application: Application, private val repository: ProductReposit
             val response = repository.getProduct(productCode)
             productResponse.value = response
         }
+    }
+
+    fun isProductInDb():Boolean{
+        if(productsFromDB.value != null) {
+            productsFromDB.value!!.forEach { productDB ->
+                if (productDB.barcode == productCode) {
+                    productFromDB = productRepository.getProduct(productCode)
+                    nutrimentFromDB = productRepository.getNutriment(productCode)
+                    return true
+                }
+            }
+        }
+        return false
     }
 }

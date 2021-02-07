@@ -1,6 +1,7 @@
 package com.example.jedzonko.model.database.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.jedzonko.model.database.CalculatorDB
 import com.example.jedzonko.model.database.NutrimentDB
 import com.example.jedzonko.model.database.ProductDB
