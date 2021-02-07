@@ -19,7 +19,7 @@ class ProductVM(application: Application, private val repository: ProductReposit
 
     val productResponse: MutableLiveData<Response<Request>> = MutableLiveData()
     var productCode:String = ""
-    val product: Product = productResponse.value!!.body()!!.product
+    val product:MutableLiveData<Product> = MutableLiveData()
 
     private val productRepository: ProductDbRepository =
             ProductDbRepository(MyDatabase.getDatabase(application).productDao())
@@ -27,14 +27,14 @@ class ProductVM(application: Application, private val repository: ProductReposit
 
     fun getNutriments(): Map<String, String> {
         // tworzy liste atrybutów klasy nutriments czyli wartości odżywczych
-        val tmp = product.nutriments.javaClass.kotlin.memberProperties
+        val tmp = product.value!!.nutriments.javaClass.kotlin.memberProperties
         val names = mutableListOf<String>()
         val values = mutableListOf<String>()
         tmp.forEach{
             // Jeżeli wartosć danego atrybutu jest różna od null dodaje go do listy
-            if(it.get(product.nutriments) != null){
+            if(it.get(product.value!!.nutriments) != null){
                 names.add(it.name)
-                values.add(it.get(product.nutriments).toString())
+                values.add(it.get(product.value!!.nutriments).toString())
             }
         }
         return names.zip(values).toMap()
@@ -42,14 +42,14 @@ class ProductVM(application: Application, private val repository: ProductReposit
 
     fun getIngredients(): Map<String, String> {
         // tworzy liste atrybutów klasy ingredients czyli składników
-        val tmp = product.ingredients.javaClass.kotlin.memberProperties
+        val tmp = product.value!!.ingredients.javaClass.kotlin.memberProperties
         val names = mutableListOf<String>()
         val values = mutableListOf<String>()
         tmp.forEach{
             // Jeżeli wartosć danego atrybutu jest różna od null dodaje go do listy
-            if(it.get(product.ingredients) != null){
+            if(it.get(product.value!!.ingredients) != null){
                 names.add(it.name)
-                values.add(it.get(product.ingredients).toString())
+                values.add(it.get(product.value!!.ingredients).toString())
             }
         }
         // zwraca zmapowaną liste stringów
@@ -70,6 +70,7 @@ class ProductVM(application: Application, private val repository: ProductReposit
                         productResult.nutrimentsLevel.fat,
                         productResult.imageSmallUrl,productCode))
             }
+            product.value = productResponse.value!!.body()!!.product
         }
     }
 

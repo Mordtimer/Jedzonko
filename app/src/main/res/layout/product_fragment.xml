@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ProductFragment"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".view.ProductFragment">
+
 
     <TextView
         android:id="@+id/tvProductName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="15pt"
-        tools:text="Nazwa produktu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nazwa produktu" />
 
     <ImageView
         android:id="@+id/imgProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-        tools:src="@tools:sample/avatars"
-        android:layout_marginTop="16dp"/>
+        tools:src="@tools:sample/avatars" />
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="@string/addToCalc"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imgGrade"
@@ -47,24 +47,95 @@
         app:layout_constraintTop_toTopOf="@+id/imgProduct"
         tools:src="@tools:sample/avatars" />
 
+
     <TextView
-        android:id="@+id/tvGrade"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
+
+        android:id="@+id/tvSalt"
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/s_l"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgProduct"
-        android:layout_marginTop="16dp"
-        tools:text="Ocena produktu" />
+        app:layout_constraintTop_toTopOf="@+id/tvFat" />
+
+    <TextView
+        android:id="@+id/tvSaltValue"
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSalt"
+        tools:text="Low" />
+
+    <TextView
+        android:id="@+id/tvFatValue"
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@+id/tvSaltValue"
+        app:layout_constraintTop_toBottomOf="@+id/tvFat"
+        tools:text="Medium" />
+
+    <TextView
+
+        android:id="@+id/tvFat"
+
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/fat"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@+id/tvSalt"
+        app:layout_constraintTop_toBottomOf="@+id/imgProduct" />
+
+    <TextView
+        android:id="@+id/tvSugars"
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:text="Cukry"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@+id/tvSaturated"
+        app:layout_constraintTop_toTopOf="@+id/tvSalt" />
+
+    <TextView
+
+        android:id="@+id/tvSaturated"
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="32dp"
+        android:text="Nasycone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@+id/tvFat"
+        app:layout_constraintTop_toBottomOf="@+id/imgProduct" />
+
+    <TextView
+
+        android:id="@+id/tvSaturatedValue"
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@+id/tvFatValue"
+        app:layout_constraintTop_toBottomOf="@+id/tvSaturated"
+        tools:text="High" />
+
+    <TextView
+        android:id="@+id/tvSugarsValue"
+        android:layout_width="90dp"
+        android:layout_height="34dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="@+id/tvSugars"
+        app:layout_constraintTop_toBottomOf="@+id/tvSugars"
+        tools:text="High" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/seeDetails"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btAdd"
         app:layout_constraintStart_toStartOf="parent" />
 
 
