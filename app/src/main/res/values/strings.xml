@@ -20,4 +20,5 @@
     <string name="fat">Tłuszcz</string>
     <string name="sugars">Cukry</string>
     <string name="Saturated">Nasycone</string>
+    <string name="s_l">Kalorie</string>
 </resources>
