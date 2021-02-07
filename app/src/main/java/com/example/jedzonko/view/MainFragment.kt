@@ -25,13 +25,35 @@ class MainFragment() : Fragment(){
         view.findViewById<Button>(R.id.buttonScan).setOnClickListener {
             view.findNavController().navigate(R.id.action_mainFragment_to_scanFragment)
         }
-        //todo
-        //view.findViewById<BottomNavigationView>(R.id.bottomNavigation).setOnNavigationItemSelectedListener {
-        //when(it.itemId){
-        //R.id.menuHome -> tutaj zrobić akcję przeniesienia do danego fragmentu
-        //R.id.menuHome ->
-        //R.id.menuHome ->
-        //}
-        //}
+        view.findViewById<Button>(R.id.buttonCalculator).setOnClickListener {
+            view.findNavController().navigate(R.id.action_mainFragment_to_calculatorFragment)
+        }
+        view.findViewById<Button>(R.id.buttonHistory).setOnClickListener {
+            view.findNavController().navigate(R.id.action_mainFragment_to_historyFragment)
+        }
+        /*
+        view.findViewById<BottomNavigationView>(R.id.bottomNavigation).setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.menuHome -> {
+                    view.findNavController().navigate(R.id.action_mainFragment_self)
+                    true
+                }
+                R.id.menuHistory -> {
+                    view.findNavController().navigate(R.id.action_mainFragment_to_historyFragment)
+                    true
+                }
+                R.id.menuScanner -> {
+                    view.findNavController().navigate(R.id.action_mainFragment_to_scanFragment)
+                    true
+                }
+                else -> {
+                    false
+                }
+
+            }
+        }
+
+         */
     }
+
 }
