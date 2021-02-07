@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menuHome"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_menu_home"
         android:title="Home"
         />
     <item
-        android:id="@+id/menuHistory"
-        android:icon="@mipmap/ic_launcher"
+        android:id="@+id/menuCalculator"
+        android:icon="@drawable/ic_menu_calculator"
         android:title="History"
         />
     <item
         android:id="@+id/menuScanner"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_search"
         android:title="Scanner"
         />
 </menu>
