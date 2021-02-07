@@ -14,4 +14,4 @@ import java.util.*
         )
     ])
 class NutrimentDB(@PrimaryKey() val id: String, val energykcal:String?, val salt: String?, val sugars: String?,
-                  val fat:String?, var barcode:String)
+                  val fat:String?, val saturatedFat:String?, var barcode:String)
