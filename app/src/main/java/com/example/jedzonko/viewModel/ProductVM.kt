@@ -93,6 +93,7 @@ class ProductVM(application: Application, private val repository: ProductReposit
         productCode = code;
     }
 
+
     fun getProductFromApi() {
         viewModelScope.launch {
             val response = repository.getProduct(productCode)

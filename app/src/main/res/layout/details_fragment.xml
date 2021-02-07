@@ -10,9 +10,9 @@
 
     <ImageView
         android:id="@+id/imgDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="115dp"
+        android:layout_height="99dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -20,30 +20,48 @@
         android:id="@+id/tvDetailsProductName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Nazwa produktu"
-        app:layout_constraintBottom_toBottomOf="@+id/imgDetails"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgDetails"
-        app:layout_constraintTop_toTopOf="@+id/imgDetails"
-        android:layout_marginLeft="16dp"
-        android:textSize="15pt"/>
-
-    <TextView
-        android:id="@+id/tvDetails"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:text="Tu wszystkie parametry, można potem zrobić tabelkę czy coś"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/product_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toStartOf="@+id/imgDetails"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgDetails" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btIngredients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/ingredients"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/btNutriments"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btIngredients">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvInfo"
+            android:paddingBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btNutriments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Wartości odżywcze w 100g"
+
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toEndOf="@+id/btIngredients"
+        app:layout_constraintTop_toBottomOf="@+id/imgDetails" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
