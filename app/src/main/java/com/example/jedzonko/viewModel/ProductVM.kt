@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.jedzonko.model.Product
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.Request
 import com.example.jedzonko.model.database.MyDatabase
