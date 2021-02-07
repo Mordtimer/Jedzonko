@@ -113,4 +113,8 @@
             android:id="@+id/action_summaryFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/nutrimentsFragment"
+        android:name="com.example.jedzonko.view.NutrimentsFragment"
+        android:label="NutrimentsFragment" />
 </navigation>
