@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.jedzonko.model.Product
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.Request
+import com.example.jedzonko.model.database.CalculatorDB
 import com.example.jedzonko.model.database.MyDatabase
 import com.example.jedzonko.model.database.NutrimentDB
 import com.example.jedzonko.model.database.ProductDB
+import com.example.jedzonko.model.database.repository.CalculatorDbRepository
 import com.example.jedzonko.model.database.repository.ProductDbRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -25,9 +27,11 @@ class ProductVM(application: Application, private val repository: ProductReposit
     var productFromDB:LiveData<ProductDB>? = null
     var nutrimentFromDB:LiveData<NutrimentDB>? = null
 
-
     private val productRepository: ProductDbRepository =
-            ProductDbRepository(MyDatabase.getDatabase(application).productDao())
+        ProductDbRepository(MyDatabase.getDatabase(application).productDao())
+
+    private val calculatorRepository: CalculatorDbRepository =
+        CalculatorDbRepository(MyDatabase.getDatabase(application).calculatorDao(),MyDatabase.getDatabase(application).productDao())
 
     val productsFromDB:LiveData<List<ProductDB>> = productRepository.readAll
 
@@ -107,5 +111,17 @@ class ProductVM(application: Application, private val repository: ProductReposit
             }
         }
         return false
+    }
+
+    fun addProductToCalculator(){
+        viewModelScope.launch {
+            calculatorRepository.addProductToCalculator(
+                CalculatorDB(
+                    productCode + "C",
+                    1,
+                    productCode
+                )
+            )
+        }
     }
 }

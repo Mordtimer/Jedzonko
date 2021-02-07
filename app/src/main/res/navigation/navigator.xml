@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_productFragment_to_notFoundFragment2"
             app:destination="@id/notFoundFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_calculatorFragment"
+            app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/notFoundFragment"

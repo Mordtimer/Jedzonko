@@ -88,8 +88,9 @@ class ProductFragment : Fragment() {
             layoutInflater, container, false)
 
         binding.btAdd.setOnClickListener {
-            //TODO
-            // Dodać dodawanie do kalkulatora
+            viewModel.addProductToCalculator()
+            val action = ProductFragmentDirections.actionProductFragmentToCalculatorFragment()
+            findNavController().navigate(action)
         }
 
         binding.btDetails.setOnClickListener {
