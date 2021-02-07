@@ -44,14 +44,12 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = HistoryItemBinding.inflate(LayoutInflater.from(parent.context))
+        binding = HistoryItemBinding.inflate(LayoutInflater.from(parent.context),parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val product: ProductDB = dataSet.value?.get(position) ?:
-        ProductDB("","", Date())
-        holder.bind(product)
+            holder.bind(dataSet.value!!.get(position))
     }
 
     override fun getItemCount(): Int = dataSet.value?.size?:0
