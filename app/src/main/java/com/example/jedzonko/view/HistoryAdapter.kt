@@ -1,20 +1,25 @@
 package com.example.jedzonko.view
 
+import android.content.ContentValues.TAG
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.view.drawToBitmap
 import androidx.lifecycle.LiveData
-import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jedzonko.R
 import com.example.jedzonko.databinding.HistoryItemBinding
 import com.example.jedzonko.model.database.ProductDB
+import kotlinx.coroutines.*
+import java.io.IOException
 import java.io.InputStream
+import java.lang.Exception
+import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
-import androidx.navigation.Navigation.findNavController
+
 
 class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
@@ -24,19 +29,26 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
         init {
             binding.rowHistoryItem.setOnClickListener {
                 val currentBarcode = dataSet.value!![adapterPosition].barcode
-                val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(currentBarcode)
+                val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(
+                    currentBarcode
+                )
                 findNavController(binding.root).navigate(action)
             }
         }
 
         fun bind(product: ProductDB){
+            val result: Deferred<Bitmap?> = GlobalScope.async {
+                getBitmapFromURL(product.label)
+            }
             binding.tvHistoryProductName.text = product.productName
             binding.tvDate.text = product.date.toString()
-            //todo
-            /*skąd wziąć url??
-            var bitmap: Bitmap = BitmapFactory.decodeStream((InputStream)new URL(product.))
-            binding.imgHistoryProduct.
-             */
+
+            GlobalScope.launch(Dispatchers.Main) {
+                val bitmap = result.await()
+                bitmap.apply {
+                    binding.imgHistoryProduct.setImageBitmap(bitmap)
+                }
+            }
         }
     }
 
@@ -47,9 +59,22 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product: ProductDB = dataSet.value?.get(position) ?:
-        ProductDB("","", "", Date())
+        ProductDB("", "", "", Date())
         holder.bind(product)
     }
 
     override fun getItemCount(): Int = dataSet.value?.size?:0
+
+    suspend fun getBitmapFromURL(src: String?): Bitmap? {
+        return try {
+            val url = URL(src)
+            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
+            connection.doInput = true
+            connection.connect()
+            val input: InputStream = connection.getInputStream()
+            BitmapFactory.decodeStream(input)
+        } catch (e: IOException) {
+            null
+        }
+    }
 }

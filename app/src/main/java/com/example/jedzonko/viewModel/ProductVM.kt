@@ -66,7 +66,7 @@ class ProductVM(application: Application, private val repository: ProductReposit
                 productRepository.add(
                     ProductDB(productCode,
                         productResult.Name,
-                        productResult.imageSmallUrl,
+                        productResult.imageUrl,
                         date),
                     NutrimentDB(productCode+"N",
                         productResult.nutriments.energykcal100g,
