@@ -24,4 +24,9 @@
     <string name="home">Strona główna</string>
     <string name="calc">Kalkulator</string>
     <string name="search">Szukaj</string>
+    <string name="summaryCalories">Ilość kalorii (kcal)</string>
+    <string name="summarySalt">Sól (g)</string>
+    <string name="summaryFat">Tłuszcze (g)</string>
+    <string name="summaryFatSaturated">Tłuszcze nasycone (g)</string>
+    <string name="summarySugars">Cukry (g)</string>
 </resources>

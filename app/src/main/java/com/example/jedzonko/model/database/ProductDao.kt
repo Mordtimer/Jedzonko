@@ -26,6 +26,9 @@ interface ProductDao {
     @Query("SELECT * FROM nutrimentTable WHERE barcode == :barcode")
     fun getNutrimentFromBarcode(barcode: String):LiveData<NutrimentDB>
 
+    @Query("Select nutrimentTable.id, energykcal, salt, sugars, fat, saturatedFat, nutrimentTable.barcode from nutrimentTable inner join calculatorTable")
+    fun allNutriments():LiveData<List<NutrimentDB>>
+
     @Query("Select id, productTable.barcode, productName, label, date from productTable inner join calculatorTable on productTable.barcode=calculatorTable.barcode")
     fun getCalculatorProducts():LiveData<List<ProductDB>>
 

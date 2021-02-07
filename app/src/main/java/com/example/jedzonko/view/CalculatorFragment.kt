@@ -1,6 +1,7 @@
 package com.example.jedzonko.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,12 @@ import com.example.jedzonko.databinding.HistoryFragmentBinding
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.database.CalculatorDB
 import com.example.jedzonko.model.database.ProductDB
+import com.example.jedzonko.util.Constants
 import com.example.jedzonko.viewModel.CalculatorVM
 import com.example.jedzonko.viewModel.CalculatorVMFactory
 import com.example.jedzonko.viewModel.HistoryVM
 import com.example.jedzonko.viewModel.HistoryVMFactory
+import kotlin.math.roundToInt
 
 class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
 
@@ -48,14 +51,33 @@ class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
         recyclerView = binding.rvCalculator
         recyclerView.adapter = calculatorAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
-
+        /*
         view.findViewById<Button>(R.id.buttonSummary).setOnClickListener {
             view.findNavController().navigate(R.id.action_calculatorFragment_to_summaryFragment)
         }
-
+        */
         view.findViewById<Button>(R.id.buttonAddProduct).setOnClickListener {
             view.findNavController().navigate(R.id.action_calculatorFragment_to_scanFragment)
         }
+
+        viewModel.nutriments.observe(viewLifecycleOwner, { nutris ->
+            viewModel.quantities.observe(viewLifecycleOwner, {
+
+                var sumKcal = 0.0
+
+                for (nutri in nutris) {
+                    for (calc in it) {
+                        if (nutri.barcode == calc.barcode) {
+                            sumKcal += nutri.energykcal!!.toDouble() / 300 * Constants.NUTRIMENT_BASE * calc.quantity
+                            //nie wiem czemu 300 lol ale działa
+                        }
+                    }
+                }
+                binding.tvKcal.text = sumKcal.roundToInt().toString()+"/"+Constants.MAX_KCAL+"kcal   "
+                if(sumKcal.roundToInt()>Constants.MAX_KCAL)
+                    binding.tvKcal.text = binding.tvKcal.text.toString() + "Nadmiar kalorii!"
+            })
+        })
 
     }
 

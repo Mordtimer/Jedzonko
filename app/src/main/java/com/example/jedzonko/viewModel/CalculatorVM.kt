@@ -21,8 +21,11 @@ class CalculatorVM(application: Application) : AndroidViewModel(application) {
 
     private val productRepository: CalculatorDbRepository =
         CalculatorDbRepository(MyDatabase.getDatabase(application).calculatorDao(), MyDatabase.getDatabase(application).productDao())
+    private val nutrimentRepository: ProductDbRepository =
+        ProductDbRepository(MyDatabase.getDatabase(application).productDao())
     val products: LiveData<List<ProductDB>> = productRepository.getCalculatorProducts()
     val quantities: LiveData<List<CalculatorDB>> = productRepository.readAll
+    val nutriments: LiveData<List<NutrimentDB>> = nutrimentRepository.allNutriments()
 
     fun changeQuantity(new:Int, barcode:String){
         viewModelScope.launch {
