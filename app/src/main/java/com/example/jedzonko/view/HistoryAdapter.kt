@@ -24,7 +24,7 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
         init {
             binding.rowHistoryItem.setOnClickListener {
                 val currentBarcode = dataSet.value!![adapterPosition].barcode
-                // TODO Zaimplementować nawigacje (Marcin nie utworzył jeszcze klasy od fragmentu i nie mogłem tego zrobić)
+                //Zaimplementować nawigacje (Marcin nie utworzył jeszcze klasy od fragmentu i nie mogłem tego zrobić)
                 val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(currentBarcode)
                 findNavController(binding.root).navigate(action)
             }

@@ -12,7 +12,15 @@ class CalculatorDbRepository(private val calculatorDao: CalculatorDao, private v
         calculatorDao.insert(calculator)
     }
 
+    fun getCalculatorProducts():LiveData<List<ProductDB>>{
+        return productDao.getCalculatorProducts()
+    }
+
     suspend fun update(calculator: CalculatorDB){
         calculatorDao.insert(calculator)
+    }
+
+    suspend fun deleteProductFromCalculator(calculator: CalculatorDB){
+        calculatorDao.delete(calculator)
     }
 }

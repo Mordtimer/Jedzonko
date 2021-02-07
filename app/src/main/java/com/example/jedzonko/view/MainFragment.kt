@@ -49,7 +49,6 @@ class MainFragment() : Fragment(){
                 else -> {
                     false
                 }
-
             }
         }
 
