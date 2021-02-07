@@ -67,14 +67,13 @@ class ProductFragment : Fragment() {
             layoutInflater, container, false)
 
         binding.btAdd.setOnClickListener {
-            //TODO
-            // Dodać dodawanie do kalkulatora
+            //TODO Dodać dodawanie do kalkulatora
         }
         binding.btDetails.setOnClickListener {
-            val action = ProductFragmentDirections.actionProductFragmentToDetailsFragment()
+            val action = ProductFragmentDirections
+                .actionProductFragmentToDetailsFragment(args.barcode)
             findNavController().navigate(action)
         }
-
         return binding.root
     }
 }

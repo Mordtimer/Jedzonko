@@ -21,4 +21,9 @@
     <string name="sugars">Cukry</string>
     <string name="Saturated">Nasycone</string>
     <string name="s_l">Kalorie</string>
+    <string name="product_name">Nazwa produktu</string>
+    <string name="showIngredients">Pokaż składniki</string>
+    <string name="showNutriments">Pokaż wartości odżywcze</string>
+    <string name="nutriments">Wartości odżywcze</string>
+    <string name="ingredients">Składniki</string>
 </resources>

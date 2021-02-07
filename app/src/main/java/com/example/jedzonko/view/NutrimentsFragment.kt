@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
 import com.example.jedzonko.databinding.NutrimentsFragmentBinding
 import com.example.jedzonko.databinding.ProductFragmentBinding
 import com.example.jedzonko.viewModel.ProductVM
-//TODO dodać rzeczy związane z RV + dodać rzeczy związane z adaptere: patrz history fragment od Gabi
 
 class NutrimentsFragment : Fragment() {
     private var _binding: NutrimentsFragmentBinding? = null
     private lateinit var viewModel: ProductVM
+    private lateinit var recyclerView: RecyclerView
 
     private val binding get() = _binding!!
 
@@ -30,4 +31,8 @@ class NutrimentsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
 }
