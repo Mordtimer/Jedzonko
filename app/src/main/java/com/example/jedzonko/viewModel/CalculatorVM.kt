@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.Request
+import com.example.jedzonko.model.database.CalculatorDB
 import com.example.jedzonko.model.database.MyDatabase
 import com.example.jedzonko.model.database.NutrimentDB
 import com.example.jedzonko.model.database.ProductDB
@@ -18,7 +19,20 @@ import java.util.*
 
 class CalculatorVM(application: Application) : AndroidViewModel(application) {
 
-    //private val productRepository: CalculatorDbRepository =
-      //  CalculatorDbRepository(MyDatabase.getDatabase(application).calculatorDao(), MyDatabase.getDatabase(application).productDao())
-    //val products: LiveData<List<ProductDB>> = productRepository.readAll()
+    private val productRepository: CalculatorDbRepository =
+        CalculatorDbRepository(MyDatabase.getDatabase(application).calculatorDao(), MyDatabase.getDatabase(application).productDao())
+    val products: LiveData<List<ProductDB>> = productRepository.getCalculatorProducts()
+    val quantities: LiveData<List<CalculatorDB>> = productRepository.readAll
+
+    fun changeQuantity(new:Int, barcode:String){
+        viewModelScope.launch {
+            productRepository.update(CalculatorDB(barcode+"C", new, barcode))
+        }
+    }
+
+    fun deleteFromCalculator(calculatorDB: CalculatorDB){
+        viewModelScope.launch {
+            productRepository.deleteProductFromCalculator(calculatorDB)
+        }
+    }
 }
