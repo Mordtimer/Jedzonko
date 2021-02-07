@@ -11,19 +11,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ToggleButton
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.jedzonko.MainActivity
 import com.example.jedzonko.R
+import com.example.jedzonko.databinding.ScanFragmentBinding
 import com.example.jedzonko.viewModel.CameraXVM
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -33,7 +31,11 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-class ScanFragment() : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {
+class ScanFragment() : Fragment(R.layout.scan_fragment), ActivityCompat.OnRequestPermissionsResultCallback {
+
+    private var _binding: ScanFragmentBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var cameraXVM: CameraXVM
     private lateinit var productCode: String
 
@@ -57,17 +59,20 @@ class ScanFragment() : Fragment(), ActivityCompat.OnRequestPermissionsResultCall
             savedInstanceState: Bundle?
     ): View? {
         cameraXVM = ViewModelProvider(requireActivity()).get(CameraXVM::class.java)
-        //productViewModel = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        return inflater.inflate(R.layout.scan_fragment, container, false)
+        _binding = ScanFragmentBinding.inflate(
+            layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.toggleButtonFlash.isChecked = false
         setupCamera(view)
     }
 
     private fun toggleFlash(control: CameraControl){
-            val flashButton = requireView().findViewById<ToggleButton>(R.id.toggleButtonFlash)
+            val flashButton = binding.toggleButtonFlash
             flashButton.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     control.enableTorch(true)
@@ -78,7 +83,7 @@ class ScanFragment() : Fragment(), ActivityCompat.OnRequestPermissionsResultCall
     }
 
     private fun setupCamera(view: View) {
-        previewView = view.findViewById(R.id.preview_view)
+        previewView = binding.previewView
         cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
         ViewModelProvider(
                 this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
