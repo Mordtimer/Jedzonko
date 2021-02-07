@@ -39,7 +39,7 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product: ProductDB = dataSet.value?.get(position) ?:
-        ProductDB("","", Date())
+        ProductDB("","", "", Date())
         holder.bind(product)
     }
 

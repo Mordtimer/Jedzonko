@@ -10,10 +10,11 @@ import java.util.*
 abstract class MyDatabase:RoomDatabase() {
 
     abstract fun productDao(): ProductDao
+    abstract fun calculatorDao(): CalculatorDao
 
     companion object{
         @Volatile
-        private var INSTANCE: MyDatabase?=null
+        private var INSTANCE: MyDatabase ?= null
 
         fun getDatabase(context: Context): MyDatabase {
             val tempInstance= INSTANCE
