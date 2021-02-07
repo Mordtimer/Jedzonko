@@ -1,7 +1,9 @@
 package com.example.jedzonko.view.adapter
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +11,7 @@ import com.example.jedzonko.databinding.HistoryItemBinding
 import com.example.jedzonko.model.database.ProductDB
 import com.example.jedzonko.view.HistoryFragmentDirections
 import kotlinx.coroutines.*
+import java.time.LocalDate
 import java.util.*
 
 
@@ -32,7 +35,9 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
                 getBitmapFromURL(product.label)
             }
             binding.tvHistoryProductName.text = product.productName
-            binding.tvDate.text = product.date.toString()
+            var tmpDate = product.date.toString()
+            tmpDate = tmpDate.removeRange(10, tmpDate.length).removeRange(0,4)
+            binding.tvDate.text = tmpDate
 
             GlobalScope.launch(Dispatchers.Main) {
                 val bitmap = result.await()
