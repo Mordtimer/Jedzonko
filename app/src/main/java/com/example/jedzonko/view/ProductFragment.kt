@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.example.jedzonko.R
 import com.example.jedzonko.databinding.ProductFragmentBinding
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.viewModel.ProductVM
@@ -24,26 +22,31 @@ class ProductFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         val repository = ProductRepository()
         val vmFactory = ProductVMFactory(requireActivity().application, repository)
-        viewModel = ViewModelProvider(this,vmFactory).get(ProductVM::class.java)
+        viewModel = ViewModelProvider(this, vmFactory).get(ProductVM::class.java)
         viewModel.setCode(args.barcode)
         viewModel.getProductFromApi()
-        viewModel.productResponse.observe(this,{
+        viewModel.productResponse.observe(this, {
 
-            if(it.isSuccessful) {
-                Log.d("Name", it.body()?.product?.Name?:"Nie Wyszlo")
-                if(it.body()?.product!=null)
+            if (it.isSuccessful) {
+                Log.d("Name", it.body()?.product?.Name ?: "Nie Wyszlo")
+                if (it.body()?.product != null) {
                     viewModel.addProduct()
-                binding.tvProductName.text = it.body()?.product?.Name?:"Nie Wyszlo"
+                    binding.apply {
+                        tvProductName.text = viewModel.product.value!!.Name
+                        tvFatValue.text = viewModel.product.value!!.nutrimentsLevel.fat
+                        tvSaltValue.text = viewModel.product.value!!.nutrimentsLevel.salt
+                        tvSaturatedValue.text = viewModel.product.value!!.nutrimentsLevel.saturatedFat
+                        tvSugarsValue.text = viewModel.product.value!!.nutrimentsLevel.sugars
+                    }
+                }
 
                 Log.d("Product: ", it.body()?.product.toString())
                 val tmp = it.body()?.product!!.nutriments.javaClass.kotlin.memberProperties
-                tmp.forEach{ c->
+                tmp.forEach { c ->
                     val string = c.get(it.body()!!.product.nutriments)
-                    Log.d ( "Name: ${c.name}", "value: $string")
+                    Log.d("Name: ${c.name}", "value: $string")
                 }
                 Log.d("Nutriments: ", tmp.toString())
             }
