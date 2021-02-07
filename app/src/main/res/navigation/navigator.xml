@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_productFragment_to_notFoundFragment2"
             app:destination="@id/notFoundFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_calculatorFragment"
+            app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/notFoundFragment"
@@ -91,6 +94,9 @@
         <action
             android:id="@+id/action_detailsFragment_to_productFragment"
             app:destination="@id/productFragment" />
+        <argument
+            android:name="barcode"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"

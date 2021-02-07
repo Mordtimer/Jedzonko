@@ -27,13 +27,13 @@ class ProductFragment : Fragment() {
         val vmFactory = ProductVMFactory(requireActivity().application, repository)
         viewModel = ViewModelProvider(this, vmFactory).get(ProductVM::class.java)
         viewModel.setCode(args.barcode)
+
         viewModel.productsFromDB.observe(this,{
             if (!viewModel.isProductInDb()) {
                 viewModel.getProductFromApi()
                 viewModel.productResponse.observe(this, {
 
                     if (it.isSuccessful) {
-                        Log.d("Name", it.body()?.product?.Name ?: "Nie Wyszlo")
                         if (it.body()?.product != null) {
                             viewModel.addProduct()
                             binding.apply {
@@ -45,14 +45,6 @@ class ProductFragment : Fragment() {
                                 tvSugarsValue.text =
                                     viewModel.product.value!!.nutrimentsLevel.sugars
                             }
-                            Log.d("Product: ", it.body()?.product.toString())
-                            val tmp =
-                                it.body()?.product!!.nutriments.javaClass.kotlin.memberProperties
-                            tmp.forEach { c ->
-                                val string = c.get(it.body()!!.product.nutriments)
-                                Log.d("Name: ${c.name}", "value: $string")
-                            }
-                            Log.d("Nutriments: ", tmp.toString())
                         } else {
                             val action =
                                 ProductFragmentDirections.actionProductFragmentToNotFoundFragment2(
@@ -63,6 +55,7 @@ class ProductFragment : Fragment() {
                     }
                 })
             } else {
+                viewModel.isProductInDb()
                 viewModel.productFromDB!!.observe(this,{
                     binding.tvProductName.text = viewModel.productFromDB!!.value!!.productName})
                 viewModel.nutrimentFromDB!!.observe(this, {
@@ -72,6 +65,7 @@ class ProductFragment : Fragment() {
                             viewModel.nutrimentFromDB!!.value!!.saturatedFat
                     binding.tvSugarsValue.text = viewModel.nutrimentFromDB!!.value!!.sugars
             })
+                viewModel.updateProduct()
             }
         })
     }
@@ -88,15 +82,16 @@ class ProductFragment : Fragment() {
             layoutInflater, container, false)
 
         binding.btAdd.setOnClickListener {
-            //TODO
-            // Dodać dodawanie do kalkulatora
-        }
-
-        binding.btDetails.setOnClickListener {
-            val action = ProductFragmentDirections.actionProductFragmentToDetailsFragment()
+            viewModel.addProductToCalculator()
+            val action = ProductFragmentDirections.actionProductFragmentToCalculatorFragment()
             findNavController().navigate(action)
         }
 
+        binding.btDetails.setOnClickListener {
+            val action = ProductFragmentDirections
+                .actionProductFragmentToDetailsFragment(args.barcode)
+            findNavController().navigate(action)
+        }
         return binding.root
     }
 }

@@ -6,9 +6,7 @@ import com.example.jedzonko.model.database.*
 class CalculatorDbRepository(private val calculatorDao: CalculatorDao, private val productDao: ProductDao) {
     val readAll: LiveData<List<CalculatorDB>> = calculatorDao.all()
 
-    suspend fun addProductToCalculator(product: ProductDB, nutriment: NutrimentDB, calculator: CalculatorDB){
-        productDao.insertProduct(product)
-        productDao.insertNutriment(nutriment)
+    suspend fun addProductToCalculator(calculator: CalculatorDB){
         calculatorDao.insert(calculator)
     }
 
