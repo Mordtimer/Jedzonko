@@ -29,7 +29,7 @@ class NotFoundFragment : Fragment(R.layout.not_found_fragment) {
             }
         }
         binding.buttonTryAgain.setOnClickListener {
-            if (view.findNavController().currentDestination?.id == R.id.mainFragment) {
+            if (view.findNavController().currentDestination?.id == R.id.notFoundFragment) {
                 val action = NotFoundFragmentDirections.actionNotFoundFragmentToScanFragment()
                 findNavController().navigate(action)
             }
