@@ -10,5 +10,6 @@
     <color name="green">#104E05</color>
     <color name="background">#051A02</color>
     <color name="lighterGreen">#166807</color>
-    <color name="yellowGreen">#5A7A0D</color>
+    <color name="yellowGreen">#805A7A0D</color>
+    <color name="mtrl_btn_text_color_selector">#CDCDCD</color>
 </resources>

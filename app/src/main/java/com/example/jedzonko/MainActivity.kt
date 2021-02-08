@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         private var appBarConfiguration: AppBarConfiguration? = null
         override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         setContentView(R.layout.activity_main)
             this.supportActionBar?.hide()
             navController =
