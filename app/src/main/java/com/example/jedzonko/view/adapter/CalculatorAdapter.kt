@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jedzonko.databinding.CalculatorItemBinding
 import com.example.jedzonko.model.database.ProductDB
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import com.example.jedzonko.R
 import com.example.jedzonko.model.database.CalculatorDB
 import com.example.jedzonko.util.Constants
 import com.example.jedzonko.view.adapter.getBitmap
@@ -24,17 +26,24 @@ class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>, private 
             binding.rowCalculator.setOnClickListener {
                 val currentBarcode = dataSet.value!![adapterPosition].barcode
                 val action = CalculatorFragmentDirections.actionCalculatorFragmentToProductFragment(currentBarcode)
-                findNavController(binding.root).navigate(action)
+                if (binding.root.findNavController().currentDestination?.id == R.id.calculatorFragment) {
+                     findNavController(binding.root).navigate(action)
+                }
             }
         }
 
         fun bind(product: ProductDB){
             binding.tvCalculatorName.text = product.productName
             //todo: naprawić jednostki może dodać buttony ++ / --
-            for(q in quantity.value!!){
-                if(q.barcode == product.barcode){
-                    binding.tvCalculatorMass.text = (Constants.NUTRIMENT_BASE*q.quantity).toString()
-                    binding.tvNumber.text = q.quantity.toString()
+
+            // If naprawia buga po którym wywalało NullPointerException
+            if(quantity.value != null) {
+                for (q in quantity.value!!) {
+                    if (q.barcode == product.barcode) {
+                        binding.tvCalculatorMass.text =
+                            (Constants.NUTRIMENT_BASE * q.quantity).toString()
+                        binding.tvNumber.text = q.quantity.toString()
+                    }
                 }
             }
             var quantity = binding.tvNumber.text.toString().toInt()
