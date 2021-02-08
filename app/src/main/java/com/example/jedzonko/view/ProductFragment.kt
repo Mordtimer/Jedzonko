@@ -1,6 +1,7 @@
 package com.example.jedzonko.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,24 @@ class ProductFragment : Fragment() {
                         if (it.body()?.product != null) {
                             viewModel.addProduct()
                             binding.apply {
+                                Log.d("grade", viewModel.product.value?.nutrimentGrade.toString())
+                                when (viewModel.product.value?.nutrimentGrade) {
+                                    "a" -> {
+                                        binding.imgGrade.setImageResource(R.drawable.nutri_a)
+                                    }
+                                    "b" -> {
+                                        binding.imgGrade.setImageResource(R.drawable.nutri_b)
+                                    }
+                                    "c" -> {
+                                        binding.imgGrade.setImageResource(R.drawable.nutri_c)
+                                    }
+                                    "d" -> {
+                                        binding.imgGrade.setImageResource(R.drawable.nutri_d)
+                                    }
+                                    "e"->{
+                                        binding.imgGrade.setImageResource(R.drawable.nutri_e)
+                                    }
+                                }
                                 tvProductName.text = viewModel.product.value?.Name
                                 tvFatValue.text = viewModel.product.value?.nutrimentsLevel?.fat
                                 tvSaltValue.text = viewModel.product.value?.nutrimentsLevel?.salt?:getString(
@@ -101,24 +120,6 @@ class ProductFragment : Fragment() {
         viewModel.product.observe(viewLifecycleOwner,{
             var imageView = binding.imgProduct
             Glide.with(activity).load(viewModel.product.value?.imageUrl).into(imageView)
-
-            when (viewModel.product.value?.nutrimentGrade) {
-                "A" -> {
-                    binding.imgGrade.setImageResource(R.drawable.nutri_a)
-                }
-                "B" -> {
-                    binding.imgGrade.setImageResource(R.drawable.nutri_b)
-                }
-                "C" -> {
-                    binding.imgGrade.setImageResource(R.drawable.nutri_c)
-                }
-                "D" -> {
-                    binding.imgGrade.setImageResource(R.drawable.nutri_d)
-                }
-                "E"->{
-                    binding.imgGrade.setImageResource(R.drawable.nutri_e)
-                }
-            }
         })
 
         return binding.root

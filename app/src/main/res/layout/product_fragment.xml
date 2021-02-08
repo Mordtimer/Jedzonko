@@ -42,12 +42,11 @@
         android:id="@+id/imgGrade"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/nutri_a"
         app:layout_constraintBottom_toTopOf="@+id/btAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFatValue"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@drawable/nutri_a" />
 
 
     <TextView
