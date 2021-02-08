@@ -41,7 +41,7 @@ class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>, private 
                 for (q in quantity.value!!) {
                     if (q.barcode == product.barcode) {
                         binding.tvCalculatorMass.text =
-                            (Constants.NUTRIMENT_BASE * q.quantity).toString()
+                            (Constants.NUTRIMENT_BASE * q.quantity).toString()+"g"
                         binding.tvNumber.text = q.quantity.toString()
                     }
                 }
