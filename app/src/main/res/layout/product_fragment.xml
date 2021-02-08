@@ -40,8 +40,9 @@
 
     <ImageView
         android:id="@+id/imgGrade"
-        android:layout_width="115dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:src="@drawable/nutri_a"
         app:layout_constraintBottom_toTopOf="@+id/btAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
