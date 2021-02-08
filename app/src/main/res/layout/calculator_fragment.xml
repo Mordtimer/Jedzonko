@@ -10,13 +10,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCalculator"
-        tools:listitem="@layout/calculator_item"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/tvKcal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/calculator_item" />
 
     <Button
         android:id="@+id/buttonAddProduct"
@@ -34,6 +36,7 @@
         app:layout_constraintBottom_toTopOf="@id/buttonAddProduct"
         app:layout_constraintEnd_toEndOf="parent" />
 -->
+
     <TextView
         android:id="@+id/tvKcal"
         android:layout_width="0dp"

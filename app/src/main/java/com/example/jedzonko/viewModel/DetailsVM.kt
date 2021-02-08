@@ -49,7 +49,11 @@ class DetailsVM(application: Application, private val repository: ProductReposit
 
                 var value = it.get(product.nutriments).toString().toBigDecimal()
                 var strValue: String
-                if (value < BigDecimal(0.001)){
+
+                if(value == BigDecimal.ZERO){
+                    strValue = "-"
+                }
+                else if (value < BigDecimal(0.001)){
 
                     value *= BigDecimal(1000000)
                     value = value.setScale(0, RoundingMode.CEILING)
