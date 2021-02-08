@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.jedzonko.R
@@ -22,12 +23,16 @@ class NotFoundFragment : Fragment(R.layout.not_found_fragment) {
         binding.tvBarcodeNotFound.text = args.barcode
 
         binding.buttonReturnToMenu.setOnClickListener {
-            val action = NotFoundFragmentDirections.actionNotFoundFragmentToMainFragment()
-            findNavController().navigate(action)
+            if (view.findNavController().currentDestination?.id == R.id.notFoundFragment) {
+                val action = NotFoundFragmentDirections.actionNotFoundFragmentToMainFragment()
+                findNavController().navigate(action)
+            }
         }
         binding.buttonTryAgain.setOnClickListener {
-            val action = NotFoundFragmentDirections.actionNotFoundFragmentToScanFragment()
-            findNavController().navigate(action)
+            if (view.findNavController().currentDestination?.id == R.id.mainFragment) {
+                val action = NotFoundFragmentDirections.actionNotFoundFragmentToScanFragment()
+                findNavController().navigate(action)
+            }
         }
     }
 

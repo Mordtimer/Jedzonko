@@ -39,7 +39,9 @@ class SummaryFragment : Fragment(R.layout.summary_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.buttonBackToCalculator).setOnClickListener {
-            view.findNavController().navigate(R.id.action_summaryFragment_to_calculatorFragment)
+            if (view.findNavController().currentDestination?.id == R.id.summaryFragment) {
+                view.findNavController().navigate(R.id.action_summaryFragment_to_calculatorFragment)
+            }
         }
         viewModel.nutriments.observe(viewLifecycleOwner, { nutris ->
             viewModel.quantities.observe(viewLifecycleOwner, {

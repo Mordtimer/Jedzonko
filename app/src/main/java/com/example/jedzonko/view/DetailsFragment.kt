@@ -63,7 +63,8 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
         viewModel.productResponse.observe(viewLifecycleOwner,{
             viewModel.product = it.body()!!.product
             viewModel.activeList.value = viewModel.getIngredients()
-            viewModel.getBitmap(viewModel.product.imageUrl)
+        // TODO sypie się z obrazkiem
+        // viewModel.getBitmap(viewModel.product.imageUrl)
         })
 
         viewModel.productResponse.observe(viewLifecycleOwner,{

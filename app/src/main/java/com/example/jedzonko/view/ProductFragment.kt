@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.jedzonko.R
@@ -56,7 +57,9 @@ class ProductFragment : Fragment() {
                                 ProductFragmentDirections.actionProductFragmentToNotFoundFragment2(
                                     viewModel.productCode
                                 )
-                            findNavController().navigate(action)
+                            if (view?.findNavController()?.currentDestination?.id == R.id.productFragment) {
+                                findNavController().navigate(action)
+                            }
                         }
                     }
                 })

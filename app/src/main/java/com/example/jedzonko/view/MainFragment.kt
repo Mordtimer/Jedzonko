@@ -23,13 +23,19 @@ class MainFragment() : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.buttonScan).setOnClickListener {
-            view.findNavController().navigate(R.id.action_mainFragment_to_scanFragment)
+            if (view.findNavController().currentDestination?.id == R.id.mainFragment) {
+                view.findNavController().navigate(R.id.action_mainFragment_to_scanFragment)
+            }
         }
         view.findViewById<Button>(R.id.buttonCalculator).setOnClickListener {
-            view.findNavController().navigate(R.id.action_mainFragment_to_calculatorFragment)
+            if (view.findNavController().currentDestination?.id == R.id.mainFragment) {
+                view.findNavController().navigate(R.id.action_mainFragment_to_calculatorFragment)
+            }
         }
         view.findViewById<Button>(R.id.buttonHistory).setOnClickListener {
-            view.findNavController().navigate(R.id.action_mainFragment_to_historyFragment)
+            if (view.findNavController().currentDestination?.id == R.id.mainFragment) {
+                view.findNavController().navigate(R.id.action_mainFragment_to_historyFragment)
+            }
         }
         /*
         view.findViewById<BottomNavigationView>(R.id.bottomNavigation).setOnNavigationItemSelectedListener {
