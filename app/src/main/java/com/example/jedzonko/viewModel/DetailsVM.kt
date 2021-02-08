@@ -1,6 +1,7 @@
 package com.example.jedzonko.viewModel
 
 import android.app.Application
+import android.provider.Settings.Global.getString
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -81,10 +82,16 @@ class DetailsVM(application: Application, private val repository: ProductReposit
     fun getIngredients(): Map<String, String> {
         val names = mutableListOf<String>()
         val values = mutableListOf<String>()
-        product.ingredients.toMutableList().forEach {
-                names.add(it.removeRange(0,3))
+        if (product.ingredients != null) {
+            product.ingredients.toMutableList().forEach {
+                names.add(it.removeRange(0, 3))
                 values.add("")
             }
+        }
+        else {
+            names.add("Brak Danych")
+            values.add("")
+        }
         // zwraca zmapowaną liste stringów
         return names.zip(values).toMap()
     }

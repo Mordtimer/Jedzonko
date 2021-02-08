@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.jedzonko.R
 import com.example.jedzonko.databinding.ProductFragmentBinding
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.viewModel.ProductVM
@@ -20,10 +21,6 @@ class ProductFragment : Fragment() {
     private lateinit var viewModel: ProductVM
     val args: ProductFragmentArgs by navArgs()
     private val binding get() = _binding!!
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +40,16 @@ class ProductFragment : Fragment() {
                         if (it.body()?.product != null) {
                             viewModel.addProduct()
                             binding.apply {
-                                tvProductName.text = viewModel.product.value!!.Name
-                                tvFatValue.text = viewModel.product.value!!.nutrimentsLevel.fat
-                                tvSaltValue.text = viewModel.product.value!!.nutrimentsLevel.salt
+                                tvProductName.text = viewModel.product.value?.Name
+                                tvFatValue.text = viewModel.product.value?.nutrimentsLevel?.fat
+                                tvSaltValue.text = viewModel.product.value?.nutrimentsLevel?.salt?:getString(
+                                    R.string.NODATA)
                                 tvSaturatedValue.text =
-                                    viewModel.product.value!!.nutrimentsLevel.saturatedFat
+                                    viewModel.product.value?.nutrimentsLevel?.saturatedFat?:getString(
+                                        R.string.NODATA)
                                 tvSugarsValue.text =
-                                    viewModel.product.value!!.nutrimentsLevel.sugars
+                                    viewModel.product.value?.nutrimentsLevel?.sugars?:getString(
+                                        R.string.NODATA)
                             }
                         } else {
                             val action =
@@ -63,13 +63,17 @@ class ProductFragment : Fragment() {
             } else {
                 viewModel.isProductInDb()
                 viewModel.productFromDB!!.observe(viewLifecycleOwner,{
-                    binding.tvProductName.text = viewModel.productFromDB!!.value!!.productName})
+                    binding.tvProductName.text = viewModel.productFromDB?.value?.productName})
                 viewModel.nutrimentFromDB!!.observe(viewLifecycleOwner, {
-                    binding.tvFatValue.text = viewModel.nutrimentFromDB!!.value!!.fat
-                    binding.tvSaltValue.text = viewModel.nutrimentFromDB!!.value!!.salt
+                    binding.tvFatValue.text = viewModel.nutrimentFromDB?.value?.fat?:getString(
+                        R.string.NODATA)
+                    binding.tvSaltValue.text = viewModel.nutrimentFromDB?.value?.salt?:getString(
+                        R.string.NODATA)
                     binding.tvSaturatedValue.text =
-                        viewModel.nutrimentFromDB!!.value!!.saturatedFat
-                    binding.tvSugarsValue.text = viewModel.nutrimentFromDB!!.value!!.sugars
+                        viewModel.nutrimentFromDB?.value?.saturatedFat?:getString(
+                            R.string.NODATA)
+                    binding.tvSugarsValue.text = viewModel.nutrimentFromDB?.value?.sugars?:getString(
+                        R.string.NODATA)
                 })
                 //viewModel.updateProduct()
             }

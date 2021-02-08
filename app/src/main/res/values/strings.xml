@@ -35,4 +35,5 @@
     <string name="summaryFat">Tłuszcze (g)</string>
     <string name="summaryFatSaturated">Tłuszcze nasycone (g)</string>
     <string name="summarySugars">Cukry (g)</string>
+    <string name="NODATA">Brak Danych</string>
 </resources>
