@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.jedzonko.R
 import com.example.jedzonko.databinding.ProductFragmentBinding
 import com.example.jedzonko.model.ProductRepository
@@ -63,6 +65,8 @@ class ProductFragment : Fragment() {
             } else {
                 viewModel.isProductInDb()
                 viewModel.productFromDB!!.observe(viewLifecycleOwner,{
+                    var imageView = binding.imgProduct
+                    Glide.with(activity).load(viewModel.productFromDB!!.value?.label).into(imageView)
                     binding.tvProductName.text = viewModel.productFromDB?.value?.productName})
                 viewModel.nutrimentFromDB!!.observe(viewLifecycleOwner, {
                     binding.tvFatValue.text = viewModel.nutrimentFromDB?.value?.fat?:getString(
@@ -92,6 +96,13 @@ class ProductFragment : Fragment() {
                 .actionProductFragmentToDetailsFragment(args.barcode)
             findNavController().navigate(action)
         }
+
+        viewModel.product.observe(viewLifecycleOwner,{
+            var imageView = binding.imgProduct
+            Glide.with(activity).load(viewModel.product.value?.imageUrl).into(imageView)
+        })
+
         return binding.root
     }
+
 }

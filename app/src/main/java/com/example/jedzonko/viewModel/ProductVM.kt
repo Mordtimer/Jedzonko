@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.jedzonko.model.Nutriments
 import com.example.jedzonko.model.Product
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.Request
@@ -26,6 +27,7 @@ class ProductVM(application: Application, private val repository: ProductReposit
     val product:MutableLiveData<Product> = MutableLiveData()
     var productFromDB:LiveData<ProductDB>? = null
     var nutrimentFromDB:LiveData<NutrimentDB>? = null
+    var URL: String? = null
 
     private val productRepository: ProductDbRepository =
         ProductDbRepository(MyDatabase.getDatabase(application).productDao())
@@ -105,6 +107,7 @@ class ProductVM(application: Application, private val repository: ProductReposit
         if(productsFromDB.value != null) {
             productsFromDB.value!!.forEach { productDB ->
                 if (productDB.barcode == productCode) {
+                    URL = productDB.label
                     productFromDB = productRepository.getProduct(productCode)
                     nutrimentFromDB = productRepository.getNutriment(productCode)
                     return true
