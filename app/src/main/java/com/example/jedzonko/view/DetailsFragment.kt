@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.jedzonko.R
 import com.example.jedzonko.databinding.DetailsFragmentBinding
 import com.example.jedzonko.model.ProductRepository
@@ -65,6 +68,8 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
 
         viewModel.productResponse.observe(viewLifecycleOwner,{
             binding.tvDetailsProductName.text = viewModel.product.Name
+            var imageView = view.findViewById<ImageView>(R.id.imgDetails);
+            Glide.with(activity).load(viewModel.product.imageUrl).into(imageView);
         })
 
 
