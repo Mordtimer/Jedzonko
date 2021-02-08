@@ -16,6 +16,7 @@ import retrofit2.Response
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.util.*
 import kotlin.reflect.full.memberProperties
 
 class DetailsVM(application: Application, private val repository: ProductRepository) : AndroidViewModel(application),
@@ -47,6 +48,12 @@ class DetailsVM(application: Application, private val repository: ProductReposit
 
                 if(value == BigDecimal.ZERO){
                     strValue = "-"
+                }
+                else if (str == "energykj100g" || str == "energy100g") {
+                    strValue = value.toString() + "kJ"
+                }
+                else if(str == "energykcal100g" ) {
+                    strValue = value.toString() + "kcal"
                 }
                 else if (value < BigDecimal(0.001)){
 
