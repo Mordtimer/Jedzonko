@@ -87,7 +87,25 @@ class ProductFragment : Fragment() {
                 viewModel.productFromDB!!.observe(viewLifecycleOwner,{
                     var imageView = binding.imgProduct
                     Glide.with(activity).load(viewModel.productFromDB!!.value?.label).into(imageView)
-                    binding.tvProductName.text = viewModel.productFromDB?.value?.productName})
+                    binding.tvProductName.text = viewModel.productFromDB?.value?.productName
+                    when (viewModel.productFromDB!!.value?.nutriScore) {
+                        "a" -> {
+                            binding.imgGrade.setImageResource(R.drawable.nutri_a)
+                        }
+                        "b" -> {
+                            binding.imgGrade.setImageResource(R.drawable.nutri_b)
+                        }
+                        "c" -> {
+                            binding.imgGrade.setImageResource(R.drawable.nutri_c)
+                        }
+                        "d" -> {
+                            binding.imgGrade.setImageResource(R.drawable.nutri_d)
+                        }
+                        "e"->{
+                            binding.imgGrade.setImageResource(R.drawable.nutri_e)
+                        }
+                    }
+                })
                 viewModel.nutrimentFromDB!!.observe(viewLifecycleOwner, {
                     binding.tvFatValue.text = viewModel.nutrimentFromDB?.value?.fat?:getString(
                         R.string.NODATA)
