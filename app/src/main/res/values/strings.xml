@@ -37,4 +37,5 @@
     <string name="NODATA">Brak Danych</string>
     <string name="nutriments_in_100g">Wartości odżywcze w 100g</string>
     <string name="name">Nazwa</string>
+    <string name="empty">Wyczyść</string>
 </resources>
