@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.jedzonko.R
 import com.example.jedzonko.databinding.HistoryItemBinding
 import com.example.jedzonko.model.database.ProductDB
 import com.example.jedzonko.view.HistoryFragmentDirections
@@ -23,7 +25,9 @@ class HistoryAdapter(private val dataSet: LiveData<List<ProductDB>>): RecyclerVi
                 val action = HistoryFragmentDirections.actionHistoryFragmentToProductFragment(
                     currentBarcode
                 )
-                findNavController(binding.root).navigate(action)
+                if (binding.root.findNavController().currentDestination?.id == R.id.historyFragment) {
+                    findNavController(binding.root).navigate(action)
+                }
             }
         }
 

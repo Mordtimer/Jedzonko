@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.jedzonko.MainActivity
 import com.example.jedzonko.R
@@ -184,7 +185,9 @@ class ScanFragment() : Fragment(R.layout.scan_fragment), ActivityCompat.OnReques
                             imageProxy.close()
                             if(view != null) {
                                 val action = ScanFragmentDirections.actionScanFragmentToProductFragment(productCode)
-                                findNavController().navigate(action)
+                                if (view?.findNavController()?.currentDestination?.id == R.id.scanFragment) {
+                                    findNavController().navigate(action)
+                                }
                             }
                         }
                     }

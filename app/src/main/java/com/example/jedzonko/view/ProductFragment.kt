@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -58,7 +59,9 @@ class ProductFragment : Fragment() {
                                 ProductFragmentDirections.actionProductFragmentToNotFoundFragment2(
                                     viewModel.productCode
                                 )
-                            findNavController().navigate(action)
+                            if (view?.findNavController()?.currentDestination?.id == R.id.productFragment) {
+                                findNavController().navigate(action)
+                            }
                         }
                     }
                 })

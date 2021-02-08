@@ -47,7 +47,9 @@ class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
         }
         */
         view.findViewById<Button>(R.id.buttonAddProduct).setOnClickListener {
-            view.findNavController().navigate(R.id.action_calculatorFragment_to_scanFragment)
+            if (view.findNavController().currentDestination?.id == R.id.calculatorFragment) {
+                view.findNavController().navigate(R.id.action_calculatorFragment_to_scanFragment)
+            }
         }
 
         viewModel.nutriments.observe(viewLifecycleOwner, { nutris ->
