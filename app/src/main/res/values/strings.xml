@@ -13,7 +13,7 @@
     <string name="notFound1">Niestety kodu</string>
     <string name="notFound2">nie znaleziono w bazie danych. Sprawdź poprawność wczytanego kodu i spróbuj ponownie lub wróć do menu.</string>
     <string name="summaryTitle">Twoje podsumowanie dnia</string>
-    <string name="hello">Witaj w aplikacji</string>
+    <string name="hello">Witaj w Jedzonko</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="salt">Sól</string>
     <string name="fat">Tłuszcz</string>

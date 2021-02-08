@@ -21,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:text="TextView"
+        tools:text="Nazwa produktu"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgCalculatorProduct"
@@ -39,22 +39,23 @@
         app:layout_constraintStart_toEndOf="@+id/imgCalculatorProduct"
         app:layout_constraintTop_toBottomOf="@+id/tvCalculatorName" />
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonAddProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="++"
+        android:src="@drawable/ic_plus"
         app:layout_constraintEnd_toStartOf="@+id/tvNumber"
-        app:layout_constraintTop_toBottomOf="@id/tvCalculatorName" />
+        app:layout_constraintTop_toBottomOf="@id/tvCalculatorName"
+        android:backgroundTint="@color/green"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonDeleteProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="--"
+        android:src="@drawable/ic_minus"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCalculatorName" />
+        app:layout_constraintTop_toBottomOf="@id/tvCalculatorName"
+        android:backgroundTint="@color/green"/>
 
     <TextView
         android:id="@+id/tvNumber"

@@ -17,8 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="5dp">
-    </Button>
+        android:padding="5dp"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/buttonScan"
@@ -30,7 +30,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="24dp"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/buttonHistory"
@@ -41,7 +42,8 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCalculator" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCalculator"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/tvHello"

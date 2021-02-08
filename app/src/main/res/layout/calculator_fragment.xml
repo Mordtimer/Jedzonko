@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:text="@string/new_product"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"/>
     <!--
     <Button
         android:id="@+id/buttonSummary"
