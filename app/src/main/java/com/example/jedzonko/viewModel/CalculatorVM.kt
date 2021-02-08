@@ -33,4 +33,10 @@ class CalculatorVM(application: Application) : AndroidViewModel(application) {
             productRepository.deleteProductFromCalculator(calculatorDB)
         }
     }
+
+    fun emptyCalculator(){
+        viewModelScope.launch {
+            productRepository.emptyCalculator()
+        }
+    }
 }

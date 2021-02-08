@@ -12,6 +12,9 @@ interface CalculatorDao {
     @Delete
     suspend fun delete(calculatorDB: CalculatorDB)
 
+    @Query("DELETE FROM calculatorTable")
+    suspend fun emptyCalculator()
+
     @Query("SELECT * FROM calculatorTable")
     fun all(): LiveData<List<CalculatorDB>>
 }

@@ -21,4 +21,8 @@ class CalculatorDbRepository(private val calculatorDao: CalculatorDao, private v
     suspend fun deleteProductFromCalculator(calculator: CalculatorDB){
         calculatorDao.delete(calculator)
     }
+
+    suspend fun emptyCalculator(){
+        calculatorDao.emptyCalculator()
+    }
 }

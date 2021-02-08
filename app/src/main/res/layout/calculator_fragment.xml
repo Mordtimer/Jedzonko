@@ -28,6 +28,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/buttonCleanCalculator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty"
+        android:backgroundTint="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <!--
     <Button
         android:id="@+id/buttonSummary"

@@ -101,6 +101,24 @@ class ProductFragment : Fragment() {
         viewModel.product.observe(viewLifecycleOwner,{
             var imageView = binding.imgProduct
             Glide.with(activity).load(viewModel.product.value?.imageUrl).into(imageView)
+
+            when (viewModel.product.value?.nutrimentGrade) {
+                "A" -> {
+                    binding.imgGrade.setImageResource(R.drawable.nutri_a)
+                }
+                "B" -> {
+                    binding.imgGrade.setImageResource(R.drawable.nutri_b)
+                }
+                "C" -> {
+                    binding.imgGrade.setImageResource(R.drawable.nutri_c)
+                }
+                "D" -> {
+                    binding.imgGrade.setImageResource(R.drawable.nutri_d)
+                }
+                "E"->{
+                    binding.imgGrade.setImageResource(R.drawable.nutri_e)
+                }
+            }
         })
 
         return binding.root

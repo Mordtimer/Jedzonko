@@ -66,6 +66,9 @@ class CalculatorFragment : Fragment(R.layout.calculator_fragment) {
             })
         })
 
+        binding.buttonCleanCalculator.setOnClickListener {
+            viewModel.emptyCalculator()
+        }
     }
 
     override fun onCreateView(
