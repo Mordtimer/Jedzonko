@@ -1,7 +1,6 @@
 package com.example.jedzonko.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jedzonko.R
 import com.example.jedzonko.databinding.CalculatorFragmentBinding
-import com.example.jedzonko.databinding.HistoryFragmentBinding
-import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.database.CalculatorDB
 import com.example.jedzonko.model.database.ProductDB
 import com.example.jedzonko.util.Constants
 import com.example.jedzonko.viewModel.CalculatorVM
 import com.example.jedzonko.viewModel.CalculatorVMFactory
-import com.example.jedzonko.viewModel.HistoryVM
-import com.example.jedzonko.viewModel.HistoryVMFactory
 import kotlin.math.roundToInt
 
 class CalculatorFragment : Fragment(R.layout.calculator_fragment) {

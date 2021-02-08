@@ -1,9 +1,7 @@
 package com.example.jedzonko.view.adapter
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.example.jedzonko.R
 import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection

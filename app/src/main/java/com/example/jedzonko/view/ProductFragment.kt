@@ -1,11 +1,10 @@
 package com.example.jedzonko.view
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -17,7 +16,6 @@ import com.example.jedzonko.databinding.ProductFragmentBinding
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.viewModel.ProductVM
 import com.example.jedzonko.viewModel.ProductVMFactory
-import kotlin.reflect.full.memberProperties
 
 class ProductFragment : Fragment() {
     private var _binding: ProductFragmentBinding? = null
@@ -107,5 +105,4 @@ class ProductFragment : Fragment() {
 
         return binding.root
     }
-
 }

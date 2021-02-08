@@ -1,12 +1,10 @@
 package com.example.jedzonko.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -16,11 +14,9 @@ import com.bumptech.glide.Glide
 import com.example.jedzonko.R
 import com.example.jedzonko.databinding.DetailsFragmentBinding
 import com.example.jedzonko.model.ProductRepository
-import com.example.jedzonko.viewModel.*
 import com.example.jedzonko.view.adapter.SimpleAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.jedzonko.viewModel.DetailsVM
+import com.example.jedzonko.viewModel.DetailsVMFactory
 
 class DetailsFragment : Fragment(R.layout.details_fragment) {
     private var _binding: DetailsFragmentBinding? = null

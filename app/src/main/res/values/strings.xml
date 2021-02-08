@@ -35,4 +35,6 @@
     <string name="summaryFatSaturated">Tłuszcze nasycone (g)</string>
     <string name="summarySugars">Cukry (g)</string>
     <string name="NODATA">Brak Danych</string>
+    <string name="nutriments_in_100g">Wartości odżywcze w 100g</string>
+    <string name="name">Nazwa</string>
 </resources>

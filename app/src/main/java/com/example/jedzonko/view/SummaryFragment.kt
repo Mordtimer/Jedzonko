@@ -1,29 +1,18 @@
 package com.example.jedzonko.view
 
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.jedzonko.R
-import com.example.jedzonko.databinding.CalculatorFragmentBinding
 import com.example.jedzonko.databinding.SummaryFragmentBinding
-import com.example.jedzonko.model.database.CalculatorDB
-import com.example.jedzonko.model.database.NutrimentDB
-import com.example.jedzonko.model.database.ProductDB
 import com.example.jedzonko.util.Constants
-import com.example.jedzonko.viewModel.CalculatorVM
-import com.example.jedzonko.viewModel.CalculatorVMFactory
 import com.example.jedzonko.viewModel.SummaryVM
 import com.example.jedzonko.viewModel.SummaryVMFactory
-import kotlin.reflect.jvm.internal.impl.load.java.Constant
 
 class SummaryFragment : Fragment(R.layout.summary_fragment) {
     private var _binding: SummaryFragmentBinding? = null

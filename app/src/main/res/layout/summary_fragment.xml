@@ -73,11 +73,11 @@
         android:id="@+id/tvCaloriesSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="/2000"
+        android:textSize="11pt"
         app:layout_constraintBottom_toBottomOf="@+id/tvCalories"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvCalories"
-        android:textSize="11pt" />
+        tools:text="/2000" />
 
     <TextView
         android:id="@+id/tvCaloriesInput"
@@ -93,11 +93,11 @@
         android:id="@+id/tvSaltSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="/6"
+        android:textSize="11pt"
         app:layout_constraintBottom_toBottomOf="@+id/tvSalt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvSalt"
-        android:textSize="11pt" />
+        tools:text="/6" />
 
     <TextView
         android:id="@+id/tvSaltInput"
@@ -113,11 +113,11 @@
         android:id="@+id/tvFatSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="/70"
+        android:textSize="11pt"
         app:layout_constraintBottom_toBottomOf="@+id/tvFat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvFat"
-        android:textSize="11pt" />
+        tools:text="/70" />
 
     <TextView
         android:id="@+id/tvFatInput"
@@ -133,11 +133,11 @@
         android:id="@+id/tvSaturatedSummarySum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="/18"
+        android:textSize="11pt"
         app:layout_constraintBottom_toBottomOf="@+id/tvSaturatedSummary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvSaturatedSummary"
-        android:textSize="11pt" />
+        tools:text="/18" />
 
     <TextView
         android:id="@+id/tvSaturatedSummaryInput"
@@ -163,11 +163,11 @@
         android:id="@+id/tvSugarsSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="/24"
+        android:textSize="11pt"
         app:layout_constraintBottom_toBottomOf="@+id/tvSugars"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvSugars"
-        android:textSize="11pt" />
+        tools:text="/24" />
 
     <TextView
         android:id="@+id/tvSugarsInput"

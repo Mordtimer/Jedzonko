@@ -101,4 +101,7 @@ dependencies {
 
     //reflections
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.30")
+
+    //Glide dependencies
+    implementation "com.github.bumptech.glide:glide:3.7.0"
 }

@@ -3,13 +3,13 @@ package com.example.jedzonko.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
-import androidx.recyclerview.widget.RecyclerView
-import com.example.jedzonko.databinding.CalculatorItemBinding
-import com.example.jedzonko.model.database.ProductDB
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.jedzonko.R
+import com.example.jedzonko.databinding.CalculatorItemBinding
 import com.example.jedzonko.model.database.CalculatorDB
+import com.example.jedzonko.model.database.ProductDB
 import com.example.jedzonko.util.Constants
 import com.example.jedzonko.view.adapter.getBitmap
 import com.example.jedzonko.viewModel.CalculatorVM
