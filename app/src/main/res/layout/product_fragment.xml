@@ -43,7 +43,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/imgProduct"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgProduct"
         app:layout_constraintTop_toTopOf="@+id/imgProduct"
         tools:src="@tools:sample/avatars" />
 

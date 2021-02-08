@@ -3,23 +3,18 @@ package com.example.jedzonko.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jedzonko.databinding.CalculatorItemBinding
 import com.example.jedzonko.model.database.ProductDB
 import androidx.navigation.Navigation.findNavController
 import com.example.jedzonko.model.database.CalculatorDB
 import com.example.jedzonko.util.Constants
-import com.example.jedzonko.view.adapter.Bitmap
+import com.example.jedzonko.view.adapter.getBitmap
 import com.example.jedzonko.viewModel.CalculatorVM
-import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
 import kotlinx.coroutines.*
 
-import java.util.*
-
 class CalculatorAdapter(private val dataSet: LiveData<List<ProductDB>>, private val quantity: LiveData<List<CalculatorDB>>, private val vm: CalculatorVM): RecyclerView.Adapter<CalculatorAdapter.ViewHolder>(),
-    Bitmap {
+    getBitmap {
 
     lateinit var binding: CalculatorItemBinding
 

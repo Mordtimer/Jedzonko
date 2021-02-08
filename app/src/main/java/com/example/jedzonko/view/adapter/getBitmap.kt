@@ -9,8 +9,8 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-interface Bitmap {
-        fun getBitmapFromURL(src: String?): Bitmap? {
+interface getBitmap {
+        suspend fun getBitmapFromURL(src: String?): Bitmap? {
             return try {
                 val url = URL(src)
                 val connection: HttpURLConnection = url.openConnection() as HttpURLConnection

@@ -16,6 +16,9 @@ import com.example.jedzonko.databinding.DetailsFragmentBinding
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.viewModel.*
 import com.example.jedzonko.view.adapter.SimpleAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class DetailsFragment : Fragment(R.layout.details_fragment) {
     private var _binding: DetailsFragmentBinding? = null
@@ -42,6 +45,7 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
         viewModel.getProductFromApi()
         detailsAdapter = SimpleAdapter(viewModel.activeList)
 
+
         // Initial Buttons status
         binding.apply {
             btNutriments.isClickable = true
@@ -59,11 +63,13 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
         viewModel.productResponse.observe(viewLifecycleOwner,{
             viewModel.product = it.body()!!.product
             viewModel.activeList.value = viewModel.getIngredients()
+            viewModel.getBitmap(viewModel.product.imageUrl)
         })
 
         viewModel.productResponse.observe(viewLifecycleOwner,{
             binding.tvDetailsProductName.text = viewModel.product.Name
         })
+
 
         binding.btIngredients.setOnClickListener {
             viewModel.activeList.value = viewModel.getIngredients()
@@ -94,8 +100,12 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
             layoutManager = viewManager
 
             }
-        viewModel.activeList.observe(viewLifecycleOwner,{
 
+        viewModel.image.observe(viewLifecycleOwner,{
+            binding.imgDetails.setImageBitmap(it)
+        })
+
+        viewModel.activeList.observe(viewLifecycleOwner,{
             recyclerView.post { recyclerView.scrollToPosition(0) }
         })
         }

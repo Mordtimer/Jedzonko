@@ -1,36 +1,35 @@
 package com.example.jedzonko.viewModel
 
 import android.app.Application
-import android.provider.Settings.Global.getString
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.navArgs
-import androidx.room.Database
 import com.example.jedzonko.model.Product
 import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.Request
 import com.example.jedzonko.model.database.MyDatabase
-import com.example.jedzonko.model.database.NutrimentDB
-import com.example.jedzonko.model.database.ProductDB
 import com.example.jedzonko.model.database.repository.ProductDbRepository
-import com.example.jedzonko.view.DetailsFragmentArgs
-import com.example.jedzonko.view.ProductFragmentArgs
+import com.example.jedzonko.view.adapter.getBitmap
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.lang.Math.round
+import java.io.InputStream
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.reflect.full.memberProperties
 
-class DetailsVM(application: Application, private val repository: ProductRepository) : AndroidViewModel(application) {
+class DetailsVM(application: Application, private val repository: ProductRepository) : AndroidViewModel(application),
+    getBitmap {
 
     val productResponse: MutableLiveData<Response<Request>> = MutableLiveData()
     var productCode: String = ""
     lateinit var product: Product
     var activeList: MutableLiveData<Map<String, String>> = MutableLiveData(emptyMap())
+    var image: MutableLiveData<Bitmap?> = MutableLiveData()
 
     private val productRepository: ProductDbRepository =
         ProductDbRepository(MyDatabase.getDatabase(application).productDao())
@@ -46,7 +45,6 @@ class DetailsVM(application: Application, private val repository: ProductReposit
                 val str = it.name
                 val df = DecimalFormat("#.###")
                 df.roundingMode = RoundingMode.CEILING
-                //TODO crashuje nie wiadomo czemu
 
                 var value = it.get(product.nutriments).toString().toBigDecimal()
                 var strValue: String
@@ -79,6 +77,7 @@ class DetailsVM(application: Application, private val repository: ProductReposit
         return names.zip(values).toMap()
     }
 
+
     fun getIngredients(): Map<String, String> {
         val names = mutableListOf<String>()
         val values = mutableListOf<String>()
@@ -99,6 +98,19 @@ class DetailsVM(application: Application, private val repository: ProductReposit
 
     fun setCode(code: String) {
         productCode = code;
+    }
+
+    fun getBitmap(myUrl: String) {
+        /*viewModelScope.launch {
+            val url = URL(myUrl)
+            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
+            connection.doInput = true
+            connection.connect()
+            val input: InputStream = connection.inputStream
+            BitmapFactory.decodeStream(input)
+
+            image.value = getBitmapFromURL(myUrl)
+        }*/
     }
 
     fun getProductFromApi() {
