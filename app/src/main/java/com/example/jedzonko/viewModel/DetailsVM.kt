@@ -2,7 +2,6 @@ package com.example.jedzonko.viewModel
 
 import android.app.Application
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,11 +13,8 @@ import com.example.jedzonko.model.database.repository.ProductDbRepository
 import com.example.jedzonko.view.adapter.getBitmap
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.io.InputStream
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.net.HttpURLConnection
-import java.net.URL
 import java.text.DecimalFormat
 import kotlin.reflect.full.memberProperties
 
@@ -98,19 +94,6 @@ class DetailsVM(application: Application, private val repository: ProductReposit
 
     fun setCode(code: String) {
         productCode = code;
-    }
-
-    fun getBitmap(myUrl: String) {
-        /*viewModelScope.launch {
-            val url = URL(myUrl)
-            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-            connection.doInput = true
-            connection.connect()
-            val input: InputStream = connection.inputStream
-            BitmapFactory.decodeStream(input)
-
-            image.value = getBitmapFromURL(myUrl)
-        }*/
     }
 
     fun getProductFromApi() {

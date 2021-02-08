@@ -3,7 +3,6 @@ package com.example.jedzonko.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.jedzonko.model.ProductRepository
 import com.example.jedzonko.model.database.CalculatorDB
 import com.example.jedzonko.model.database.MyDatabase
 import com.example.jedzonko.model.database.NutrimentDB

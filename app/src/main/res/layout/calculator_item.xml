@@ -31,13 +31,13 @@
         android:id="@+id/tvCalculatorMass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="250g"
+        android:layout_marginStart="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="@+id/buttonAddProduct"
         app:layout_constraintEnd_toStartOf="@+id/buttonAddProduct"
         app:layout_constraintStart_toEndOf="@+id/imgCalculatorProduct"
-        app:layout_constraintTop_toBottomOf="@+id/tvCalculatorName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCalculatorName"
+        tools:text="250g" />
 
     <Button
         android:id="@+id/buttonAddProduct"

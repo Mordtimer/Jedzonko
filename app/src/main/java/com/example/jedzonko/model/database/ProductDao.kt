@@ -2,8 +2,6 @@ package com.example.jedzonko.model.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import androidx.room.Dao
-import java.util.*
 
 @Dao
 interface ProductDao {

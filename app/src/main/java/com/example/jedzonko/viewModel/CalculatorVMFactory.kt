@@ -3,8 +3,8 @@ package com.example.jedzonko.viewModel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.jedzonko.model.ProductRepository
 
+@Suppress("UNCHECKED_CAST")
 class CalculatorVMFactory(
     private val application: Application,
 ): ViewModelProvider.AndroidViewModelFactory(application) {
