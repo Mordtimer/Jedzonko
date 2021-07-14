@@ -51,7 +51,6 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
             btIngredients.isClickable = false
             btIngredients.isEnabled = false
         }
-
         return binding.root
     }
 
